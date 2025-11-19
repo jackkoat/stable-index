@@ -47,14 +47,14 @@ export function HeroHeader() {
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           
-          <Button 
+          {/* <Button 
             variant="outline" 
             size="lg"
             className="bg-white/50 backdrop-blur-sm min-w-[160px]"
             onClick={() => window.location.href = '/about'}
           >
             View Methodology
-          </Button>
+          </Button> */}
         </div>
 
         {/* Trust badges */}
