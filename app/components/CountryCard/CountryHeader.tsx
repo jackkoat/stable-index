@@ -1,11 +1,5 @@
-// =====================================================
-// Country Header Component
-// =====================================================
-// Country name, flag, and trend display
-// Reusable across different card layouts
-// =====================================================
-
 import React from 'react';
+import { motion } from 'framer-motion';
 import { CountryData } from '../../../types';
 import { getTrendIcon, getTrendColor, formatNumber } from '@/lib/utils';
 
@@ -32,18 +26,31 @@ export function CountryHeader({
   const trendIcon = getTrendIcon(trend);
 
   return (
-    <div 
+    <motion.div 
       onClick={onClick}
+      whileHover="hover"
       className={`
-        flex items-center justify-between mb-6 pb-4 border-b border-surface-border
+        flex items-center justify-between mb-6 pb-4 border-b border-surface-border group
         ${clickable ? 'cursor-pointer' : ''}
         ${className}
       `}
     >
       <div className="flex items-center gap-3">
-        <span className="text-3xl">{country.flag_emoji}</span>
+        <motion.span 
+          className="text-3xl inline-block origin-bottom"
+          variants={{
+            hover: { 
+              scale: 1.25, 
+              rotate: [0, -5, 5, 0],
+              y: -2,
+              transition: { type: "spring", stiffness: 400, damping: 10 }
+            }
+          }}
+        >
+          {country.flag_emoji}
+        </motion.span>
         <div>
-          <h3 className="text-heading-sm font-bold text-text-primary tracking-tight">
+          <h3 className="text-heading-sm font-bold text-text-primary tracking-tight group-hover:text-accent-navy transition-colors">
             {country.name.toUpperCase()}
           </h3>
           <p className="text-micro text-text-dim uppercase tracking-wider">
@@ -55,7 +62,7 @@ export function CountryHeader({
         <span className="text-lg">{trendIcon}</span>
         <span>{formatNumber(Math.abs(trend_value), 1)}</span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -72,18 +79,30 @@ export function CompactCountryHeader({
   const trendIcon = getTrendIcon(trend);
 
   return (
-    <div 
+    <motion.div 
       onClick={onClick}
+      whileHover="hover"
       className={`
-        flex items-center justify-between mb-4 pb-2 border-b border-surface-border
+        flex items-center justify-between mb-4 pb-2 border-b border-surface-border group
         ${clickable ? 'cursor-pointer' : ''}
         ${className}
       `}
     >
       <div className="flex items-center gap-2">
-        <span className="text-xl">{country.flag_emoji}</span>
+        <motion.span 
+          className="text-xl inline-block origin-bottom"
+          variants={{
+            hover: { 
+              scale: 1.25, 
+              rotate: [0, -5, 5, 0],
+              transition: { type: "spring", stiffness: 400, damping: 10 }
+            }
+          }}
+        >
+          {country.flag_emoji}
+        </motion.span>
         <div>
-          <h3 className="text-body font-bold text-text-primary tracking-tight">
+          <h3 className="text-body font-bold text-text-primary tracking-tight group-hover:text-accent-navy transition-colors">
             {country.name.toUpperCase()}
           </h3>
           <p className="text-micro text-text-dim uppercase tracking-wider">
@@ -95,7 +114,7 @@ export function CompactCountryHeader({
         <span className="text-sm">{trendIcon}</span>
         <span>{formatNumber(Math.abs(trend_value), 1)}</span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -107,15 +126,27 @@ export function MinimalCountryHeader({
   className = ""
 }: Omit<CountryHeaderProps, 'trend' | 'trend_value'>) {
   return (
-    <div 
+    <motion.div 
       onClick={onClick}
+      whileHover="hover"
       className={`
         flex items-center gap-3
         ${clickable ? 'cursor-pointer hover:bg-surface-tertiary/30 p-2 -m-2 rounded transition-colors' : ''}
         ${className}
       `}
     >
-      <span className="text-xl">{country.flag_emoji}</span>
+      <motion.span 
+        className="text-xl inline-block origin-bottom"
+        variants={{
+          hover: { 
+            scale: 1.2, 
+            y: -1,
+            transition: { type: "spring", stiffness: 500, damping: 15 }
+          }
+        }}
+      >
+        {country.flag_emoji}
+      </motion.span>
       <div>
         <div className="text-body font-semibold text-text-primary">
           {country.name}
@@ -124,7 +155,7 @@ export function MinimalCountryHeader({
           {country.code}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -142,18 +173,30 @@ export function CountryHeaderWithScore({
   const trendIcon = getTrendIcon(trend);
 
   return (
-    <div 
+    <motion.div 
       onClick={onClick}
+      whileHover="hover"
       className={`
-        flex items-center justify-between mb-4
+        flex items-center justify-between mb-4 group
         ${clickable ? 'cursor-pointer' : ''}
         ${className}
       `}
     >
       <div className="flex items-center gap-3">
-        <span className="text-2xl">{country.flag_emoji}</span>
+        <motion.span 
+          className="text-2xl inline-block origin-bottom"
+          variants={{
+            hover: { 
+              scale: 1.25, 
+              rotate: [0, -5, 5, 0],
+              transition: { type: "spring", stiffness: 400, damping: 10 }
+            }
+          }}
+        >
+          {country.flag_emoji}
+        </motion.span>
         <div>
-          <h3 className="text-heading-sm font-bold text-text-primary tracking-tight">
+          <h3 className="text-heading-sm font-bold text-text-primary tracking-tight group-hover:text-accent-navy transition-colors">
             {country.name.toUpperCase()}
           </h3>
           <p className="text-micro text-text-dim uppercase tracking-wider">
@@ -170,7 +213,7 @@ export function CountryHeaderWithScore({
           <span>{formatNumber(Math.abs(trend_value), 1)}</span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -184,22 +227,35 @@ export function SelectedCountryHeader({
   className = ""
 }: CountryHeaderProps) {
   return (
-    <div 
+    <motion.div 
       onClick={onClick}
+      whileHover="hover"
       className={`
         flex items-center justify-between mb-6 pb-4 border-b-2 border-accent-navy
-        bg-accent-navy/5 -mx-4 px-4 py-2 rounded-t-lg
+        bg-accent-navy/5 -mx-4 px-4 py-2 rounded-t-lg group
         ${clickable ? 'cursor-pointer' : ''}
         ${className}
       `}
     >
       <div className="flex items-center gap-3">
         <div className="relative">
-          <span className="text-3xl">{country.flag_emoji}</span>
+          <motion.span 
+            className="text-3xl inline-block origin-bottom"
+            variants={{
+              hover: { 
+                scale: 1.2, 
+                rotate: [0, -5, 5, 0],
+                y: -2,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }
+            }}
+          >
+            {country.flag_emoji}
+          </motion.span>
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent-cyan rounded-full animate-pulse"></div>
         </div>
         <div>
-          <h3 className="text-heading-sm font-bold text-text-primary tracking-tight">
+          <h3 className="text-heading-sm font-bold text-text-primary tracking-tight group-hover:text-accent-navy transition-colors">
             {country.name.toUpperCase()}
           </h3>
           <p className="text-micro text-accent-navy font-semibold uppercase tracking-wider">
@@ -211,6 +267,6 @@ export function SelectedCountryHeader({
         <span className="text-lg">{getTrendIcon(trend)}</span>
         <span>{formatNumber(Math.abs(trend_value), 1)}</span>
       </div>
-    </div>
+    </motion.div>
   );
 }

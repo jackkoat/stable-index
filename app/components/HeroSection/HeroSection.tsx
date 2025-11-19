@@ -13,9 +13,7 @@ const RiskDistributionStats = lazy(() => import('./HeroStats').then(module => ({
 
 export function HeroSection() {
   return (
-    // Added 'min-h-full' to ensure it fills the parent h-screen container
-    // Added 'justify-center items-center text-center' for global centering
-    <div className="min-h-full flex flex-col justify-start items-center text-center max-w-5xl mx-auto py-12 pt-96 md:pt-96">
+    <div className="min-h-full flex flex-col justify-start items-center text-center max-w-5xl mx-auto py-12">
       
       {/* Main Hero Content - Centered */}
       <div className="w-full mb-8 flex flex-col items-center">

@@ -1,14 +1,14 @@
 'use client';
 
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { HeroSection } from '@/components/HeroSection';
 import { StatsOverview } from '@/components/StatsOverview';
 import { CryptoCommunitySection } from '@/components/CryptoCommunitySection';
 import { RiskLegend } from '@/components/RiskLegend';
-// Removed ExportButton import as requested
-import { useState, useEffect } from 'react';
 
-// This is a client component for the home page
+// --- Types & Helpers ---
+
 interface DashboardStats {
   total_countries: number;
   low_risk: number;
@@ -18,16 +18,59 @@ interface DashboardStats {
   avg_uri_score: number;
 }
 
+// A cleaner wrapper component to handle layout, width, and animations consistently.
+// This fixes the "verbose" structure issues.
+const SectionWrapper = ({ 
+  children, 
+  className = "", 
+  id = "",
+  fullHeight = false 
+}: { 
+  children: React.ReactNode; 
+  className?: string;
+  id?: string;
+  fullHeight?: boolean;
+}) => {
+  const variants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { duration: 0.6 }
+    }
+  };
+
+  return (
+    <motion.section
+      id={id}
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }} // Smooth trigger
+      // 'min-h-screen' prevents collision on mobile. 'py-24' adds safe breathing room.
+      className={`
+        w-full px-6 md:px-8 
+        ${fullHeight ? 'min-h-screen flex items-center py-20' : 'py-24 md:py-32'} 
+        ${className}
+      `}
+    >
+      <div className="max-w-[1400px] mx-auto w-full relative">
+        {children}
+      </div>
+    </motion.section>
+  );
+};
+
+// --- Main Page Component ---
+
 export default function HomePage() {
   const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null);
-  const [countriesData, setCountriesData] = useState([]);
-  const [dataLoading, setDataLoading] = useState(true);
+  // Removed unused data states to clean up code
 
   useEffect(() => {
-    // Load data for the home page
+    // Simulate data loading
     const loadData = async () => {
       try {
-        // TODO: Replace with actual data loading from Supabase
         setDashboardStats({
           total_countries: 195,
           low_risk: 89,
@@ -36,92 +79,42 @@ export default function HomePage() {
           critical_risk: 0,
           avg_uri_score: 72.5
         });
-        
-        setCountriesData([]);
-        setDataLoading(false);
       } catch (error) {
         console.error('Error loading dashboard data:', error);
-        setDataLoading(false);
       }
     };
 
     loadData();
   }, []);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
-    >
-      {/* Hero/Overview Section - Ensuring full height alignment */}
-      <motion.section 
-        variants={itemVariants} 
-        id="overview"
-        className="h-screen flex items-center justify-center" // Removed px-4 for full width
-      >
-        <div className="max-w-[1600px] mx-auto">
-          <HeroSection />
-        </div>
-      </motion.section>
+    // Removed specific gradient classes here to let your global background/layout handle it
+    <main className="flex flex-col w-full overflow-x-hidden">
+      
+      {/* 1. Hero Section */}
+      {/* Using fullHeight=true ensures it fills the screen but expands if needed */}
+      <SectionWrapper id="hero" fullHeight>
+        <HeroSection />
+      </SectionWrapper>
 
-      {/* Stats Overview */}
-      <motion.section 
-        variants={itemVariants}
-        className="py-16 px-4"
-      >
-        <div className="max-w-[1600px] mx-auto">
-          {dashboardStats && <StatsOverview dashboardStats={dashboardStats} />}
-        </div>
-      </motion.section>
+      {/* 2. Stats Overview */}
+      {/* Conditional rendering kept clean */}
+      {dashboardStats && (
+        <SectionWrapper id="stats">
+          <StatsOverview dashboardStats={dashboardStats} />
+        </SectionWrapper>
+      )}
 
-      {/* Crypto Community Section - New Addition */}
-      <motion.section 
-        variants={itemVariants}
-        className="py-16 px-4"
-      >
-        <div className="max-w-[1600px] mx-auto">
-          <CryptoCommunitySection />
-        </div>
-      </motion.section>
+      {/* 3. Community Section */}
+      <SectionWrapper id="community">
+        <CryptoCommunitySection />
+      </SectionWrapper>
 
-      {/* Risk Legend Section - Cleaned up & Centered */}
-      <motion.section 
-        variants={itemVariants} 
-        className="bg-surface-secondary py-24 px-4 border-t border-surface-border"
-      >
-        <div className="max-w-[1400px] mx-auto">
-          {/* Removed ExportButton grid, just rendering RiskLegend cleanly */}
-          <motion.div
-            whileHover={{ y: -2 }}
-            transition={{ duration: 0.2 }}
-          >
-            <RiskLegend />
-          </motion.div>
-        </div>
-      </motion.section>
-    </motion.div>
+      {/* 4. Risk Legend (Footer Area) */}
+      <SectionWrapper id="risk-legend" className="bg-surface-secondary/50 rounded-3xl my-8">
+        <RiskLegend />
+      </SectionWrapper>
+
+    </main>
   );
 }

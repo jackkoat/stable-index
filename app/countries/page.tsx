@@ -5,6 +5,16 @@ import { Navigation } from '@/components/Navigation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { allCountriesData } from '@/data/mockData';
 import { CountryData } from '@/types/index';
+import ReactCountryFlag from 'react-country-flag';
+
+// Mapping from ISO 3166-1 alpha-3 to alpha-2 codes for flag-icons
+const alpha3ToAlpha2: Record<string, string> = {
+  'ARG': 'AR', 'AUS': 'AU', 'BEL': 'BE', 'BRA': 'BR', 'CAN': 'CA',
+  'CHE': 'CH', 'CHN': 'CN', 'DEU': 'DE', 'ESP': 'ES', 'FRA': 'FR',
+  'GBR': 'GB', 'IDN': 'ID', 'IND': 'IN', 'ITA': 'IT', 'JPN': 'JP',
+  'KOR': 'KR', 'MEX': 'MX', 'NLD': 'NL', 'NPL': 'NP', 'POL': 'PL',
+  'RUS': 'RU', 'SAU': 'SA', 'SWE': 'SE', 'TUR': 'TR', 'USA': 'US'
+};
 
 export default function CountriesPage() {
   return (
@@ -43,14 +53,39 @@ export default function CountriesPage() {
               {allCountriesData.map((country: CountryData) => (
                 <motion.div
                   key={country.country.code}
-                  whileHover={{ scale: 1.02, y: -4 }}
+                  whileHover="hover" // Use a named variant state to coordinate children
+                  initial="rest"
+                  animate="rest"
+                  variants={{
+                    rest: { scale: 1, y: 0 },
+                    hover: { scale: 1.02, y: -4 }
+                  }}
                   transition={{ duration: 0.2 }}
-                  className="data-card cursor-pointer"
+                  className="data-card cursor-pointer group"
                 >
                   <div className="flex items-center mb-4">
-                    <span className="text-2xl mr-3">{country.country.flag_emoji}</span>
+                    {/* Animated Flag Pop-up */}
+                    <motion.div 
+                      className="mr-4 inline-block origin-bottom"
+                      variants={{
+                        rest: { scale: 1, rotate: 0 },
+                        hover: { 
+                          scale: 1.35, 
+                          rotate: [0, -5], // Simple wiggle effect with 2 keyframes
+                          transition: { type: "spring", stiffness: 300, damping: 10 }
+                        }
+                      }}
+                    >
+                      <ReactCountryFlag 
+                        countryCode={alpha3ToAlpha2[country.country.code] || country.country.code} 
+                        svg 
+                        style={{ width: '2.5em', height: '2.5em' }}
+                        className="md:w-12 md:h-12"
+                      />
+                    </motion.div>
+                    
                     <div>
-                      <h3 className="text-heading-md font-semibold text-text-primary">
+                      <h3 className="text-heading-md font-semibold text-text-primary group-hover:text-accent-navy transition-colors">
                         {country.country.name}
                       </h3>
                       <p className="text-caption text-text-muted">{country.country.code}</p>

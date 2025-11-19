@@ -178,7 +178,7 @@ export default function DashboardPage() {
             >
               <div className="data-card w-2/4 mx-auto">
                 <h2 className="text-heading-lg font-semibold text-text-primary mb-6">World Map Overview</h2>
-                <img src="/world-map.jpg" alt="World Map" className="w-full h-auto rounded-lg" />
+                <img src="/image.jpg" alt="World Map" className="w-full h-auto rounded-lg" />
               </div>
             </motion.div>
           </div>
