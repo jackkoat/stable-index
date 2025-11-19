@@ -5,7 +5,7 @@ import { HeroSection } from '@/components/HeroSection';
 import { StatsOverview } from '@/components/StatsOverview';
 import { CryptoCommunitySection } from '@/components/CryptoCommunitySection';
 import { RiskLegend } from '@/components/RiskLegend';
-import ExportButton from '@/components/ExportButton';
+// Removed ExportButton import as requested
 import { useState, useEffect } from 'react';
 
 // This is a client component for the home page
@@ -76,11 +76,11 @@ export default function HomePage() {
       animate="visible"
       className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
     >
-      {/* Hero/Overview Section */}
+      {/* Hero/Overview Section - Ensuring full height alignment */}
       <motion.section 
         variants={itemVariants} 
         id="overview"
-        className="h-screen px-4 flex items-center"
+        className="h-screen flex items-center justify-center" // Removed px-4 for full width
       >
         <div className="max-w-[1600px] mx-auto">
           <HeroSection />
@@ -107,28 +107,19 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Risk Legend & Export */}
+      {/* Risk Legend Section - Cleaned up & Centered */}
       <motion.section 
         variants={itemVariants} 
-        className="bg-surface-secondary py-20 px-4"
+        className="bg-surface-secondary py-24 px-4 border-t border-surface-border"
       >
-        <div className="max-w-[1200px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ duration: 0.2 }}
-              className="data-card"
-            >
-              <RiskLegend />
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ duration: 0.2 }}
-              className="data-card"
-            >
-              <ExportButton data={countriesData} />
-            </motion.div>
-          </div>
+        <div className="max-w-[1400px] mx-auto">
+          {/* Removed ExportButton grid, just rendering RiskLegend cleanly */}
+          <motion.div
+            whileHover={{ y: -2 }}
+            transition={{ duration: 0.2 }}
+          >
+            <RiskLegend />
+          </motion.div>
         </div>
       </motion.section>
     </motion.div>

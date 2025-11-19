@@ -1,173 +1,74 @@
-// =====================================================
-// Hero Header Component
-// =====================================================
-// Main messaging and call-to-action section
-// Optimized for lazy loading
-// =====================================================
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, ShieldCheck, Globe } from 'lucide-react';
+import { Button } from '../shared/Button';
 
-import React, { lazy, Suspense, useState, useEffect } from 'react';
-import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
-import { smoothScrollTo } from '@/lib/utils';
-
-interface HeroHeaderProps {
-  className?: string;
-}
-
-// Lazy load heavy components
-const Button = lazy(() => import('../shared/Button').then(module => ({ default: module.Button })));
-
-export function HeroHeader({ className = "" }: HeroHeaderProps) {
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    getUser();
-  }, []);
-
+export function HeroHeader() {
   return (
-    <div className={`space-y-8 ${className}`}>
-      <div className="space-y-4">
-        <div className="inline-block px-3 py-1 bg-accent-navy/10 border border-accent-navy/30 rounded text-caption 
-                      text-accent-navy uppercase tracking-wider font-semibold">
+    <div className="max-w-4xl mx-auto w-full">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col items-center text-center" // Flex column and center items
+      >
+        {/* Label */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-navy/5 border border-accent-navy/10 text-accent-navy text-sm font-medium mb-6">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-navy opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-navy"></span>
+          </span>
           Live Intelligence Platform
         </div>
-        
-        <h1 className="text-heading-xl font-bold text-text-primary leading-tight">
-          Real-Time Global Risk Intelligence
+
+        {/* Heading */}
+        <h1 className="text-display font-bold text-text-primary mb-6 tracking-tight leading-tight">
+          Real-Time Global <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-navy via-accent-navy-light to-accent-navy-dark">
+            Risk Intelligence
+          </span>
         </h1>
-        
-        <p className="text-body-lg text-text-secondary leading-relaxed">
+
+        {/* Description */}
+        <p className="text-body-lg text-text-secondary mb-8 max-w-2xl mx-auto leading-relaxed">
           Monitor social stability indicators across 25 countries with professional analysis 
           and predictive threat detection.
         </p>
-      </div>
 
-      {/* Action Buttons */}
-      <div className="flex flex-wrap gap-4">
-        <Suspense fallback={<ButtonSkeleton />}>
-          {user ? (
-            <Link href="/dashboard">
-              <Button
-                variant="primary"
-                icon="chart"
-              >
-                Go to Dashboard
-              </Button>
-            </Link>
-          ) : (
-            <Link href="/login">
-              <Button
-                variant="primary"
-                icon="arrow"
-              >
-                Get Started
-              </Button>
-            </Link>
-          )}
-        </Suspense>
-      </div>
-    </div>
-  );
-}
-
-// Button skeleton for loading state
-function ButtonSkeleton() {
-  return (
-    <div className="flex items-center gap-2 px-6 py-3 bg-neutral-200 rounded-lg animate-pulse">
-      <div className="w-5 h-5 bg-neutral-300 rounded"></div>
-      <div className="w-32 h-4 bg-neutral-300 rounded"></div>
-    </div>
-  );
-}
-
-// Simplified header for mobile
-export function MobileHeroHeader({ className = "" }: HeroHeaderProps) {
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    getUser();
-  }, []);
-
-  return (
-    <div className={`space-y-6 ${className}`}>
-      <div className="space-y-3">
-        <div className="inline-block px-2 py-1 bg-accent-navy/10 border border-accent-navy/30 rounded text-micro 
-                      text-accent-navy uppercase tracking-wider font-semibold">
-          Live Intelligence
-        </div>
-        
-        <h1 className="text-heading-lg font-bold text-text-primary leading-tight">
-          Global Risk Intelligence
-        </h1>
-        
-        <p className="text-body text-text-secondary leading-relaxed">
-          Monitor stability indicators across 25 countries
-        </p>
-      </div>
-
-      {/* Simplified Action Buttons */}
-      <div className="flex flex-col gap-3">
-        {user ? (
-          <Link href="/dashboard">
-            <button className="btn-primary w-full">
-              Go to Dashboard
-            </button>
-          </Link>
-        ) : (
-          <Link href="/login">
-            <button className="btn-primary w-full">
-              Get Started
-            </button>
-          </Link>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// Compact header for small spaces
-export function CompactHeroHeader({ className = "" }: HeroHeaderProps) {
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    getUser();
-  }, []);
-
-  return (
-    <div className={`space-y-4 ${className}`}>
-      <h1 className="text-heading-md font-bold text-text-primary">
-        Risk Intelligence Platform
-      </h1>
-      
-      <p className="text-body text-text-secondary">
-        Real-time stability monitoring across 25 countries
-      </p>
-
-      {user ? (
-        <Link href="/dashboard">
-          <button className="btn-primary">
-            Go to Dashboard
-          </button>
-        </Link>
-      ) : (
-        <Link href="/login">
-          <button className="btn-primary">
+        {/* Buttons - Centered */}
+        <div className="flex flex-wrap items-center justify-center gap-4 w-full">
+          <Button 
+            variant="primary" 
+            size="lg" 
+            className="shadow-lg shadow-accent-navy/20 hover:shadow-accent-navy/30 min-w-[160px]"
+            onClick={() => window.location.href = '/dashboard'}
+          >
             Get Started
-          </button>
-        </Link>
-      )}
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+          
+          <Button 
+            variant="outline" 
+            size="lg"
+            className="bg-white/50 backdrop-blur-sm min-w-[160px]"
+            onClick={() => window.location.href = '/about'}
+          >
+            View Methodology
+          </Button>
+        </div>
+
+        {/* Trust badges */}
+        <div className="mt-12 pt-8 border-t border-surface-border/60 flex flex-wrap justify-center gap-8 text-text-muted opacity-80">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-accent-navy" />
+            <span className="text-sm font-medium">Verified Data Sources</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Globe className="w-5 h-5 text-accent-navy" />
+            <span className="text-sm font-medium">24/7 Global Monitoring</span>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }

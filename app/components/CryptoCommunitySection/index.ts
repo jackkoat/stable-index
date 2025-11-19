@@ -4,7 +4,7 @@ export { CryptoCommunitySection } from './CryptoCommunitySection';
 
 // Sub-components for granular lazy loading
 export { SectionHeader } from './SectionHeader';
-export { BenefitsList, benefits } from './BenefitsList';
+export { BenefitsList } from './BenefitsList';
 export { BenefitCard, type BenefitItem } from './BenefitCard';
 export { CallToAction } from './CallToAction';
 

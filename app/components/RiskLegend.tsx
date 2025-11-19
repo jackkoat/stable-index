@@ -55,43 +55,44 @@ export const RiskLegend = () => {
   ];
 
   return (
-    <section className="bg-surface-secondary py-12 border-y border-surface-border">
-      <div className="max-w-[1400px] mx-auto px-8">
-        <div className="mb-6">
-          <h3 className="text-heading-md font-bold text-text-primary mb-2 uppercase tracking-tight">
+    <section className="w-full">
+      <div className="mx-auto">
+        {/* Centered Header */}
+        <div className="mb-10 text-center max-w-2xl mx-auto">
+          <h3 className="text-heading-md font-bold text-text-primary mb-3 uppercase tracking-tight">
             Risk Classification Matrix
           </h3>
-          <p className="text-body-md text-text-secondary">
-            Intelligence threat level assessment framework
+          <p className="text-body-lg text-text-secondary leading-relaxed">
+            Comprehensive intelligence threat level assessment framework designed for global monitoring.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Grid Container */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {riskLevels.map((risk) => (
             <div
               key={risk.level}
-              className="data-card hover:border-accent-cyan/30 transition-colors duration-normal"
+              className="data-card hover:border-accent-navy/30 transition-all duration-300 p-6 bg-white shadow-sm hover:shadow-md rounded-xl flex flex-col items-center text-center"
             >
-              <div className="flex items-center gap-3 mb-3">
-                <div className={`
-                  w-10 h-10 rounded-md flex items-center justify-center
-                  ${risk.level === 'Low' ? 'bg-risk-low-base/20 text-risk-low-text' : ''}
-                  ${risk.level === 'Moderate' ? 'bg-risk-moderate-base/20 text-risk-moderate-text' : ''}
-                  ${risk.level === 'High' ? 'bg-risk-high-base/20 text-risk-high-text' : ''}
-                  ${risk.level === 'Critical' ? 'bg-risk-critical-base/20 text-risk-critical-text' : ''}
-                `}>
-                  {risk.icon}
-                </div>
-                <div>
-                  <div className="font-bold text-text-primary uppercase tracking-wide text-body">
-                    {risk.level}
-                  </div>
-                  <div className="text-caption text-text-dim uppercase tracking-wider">
-                    Score: {risk.range}
-                  </div>
-                </div>
+              <div className={`
+                w-14 h-14 rounded-xl flex items-center justify-center mb-4
+                transform transition-transform duration-300 hover:scale-110 hover:-translate-y-1
+                ${risk.level === 'Low' ? 'bg-risk-low/10 text-risk-low-base ring-1 ring-risk-low/20' : ''}
+                ${risk.level === 'Moderate' ? 'bg-risk-moderate/10 text-risk-moderate-base ring-1 ring-risk-moderate/20' : ''}
+                ${risk.level === 'High' ? 'bg-risk-high/10 text-risk-high-base ring-1 ring-risk-high/20' : ''}
+                ${risk.level === 'Critical' ? 'bg-risk-critical/10 text-risk-critical-base ring-1 ring-risk-critical/20' : ''}
+              `}>
+                {risk.icon}
               </div>
-              <p className="text-body-md text-text-secondary leading-relaxed">
+              
+              <div className="font-bold text-text-primary uppercase tracking-wide text-body-lg mb-1">
+                {risk.level}
+              </div>
+              <div className="text-caption font-semibold text-text-dim uppercase tracking-wider mb-3 bg-surface-tertiary px-3 py-1 rounded-full">
+                Score: {risk.range}
+              </div>
+              
+              <p className="text-body text-text-secondary leading-relaxed">
                 {risk.description}
               </p>
             </div>

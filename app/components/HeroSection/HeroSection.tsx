@@ -1,31 +1,11 @@
-// =====================================================
-// Optimized Hero Section Component
-// =====================================================
-// Split into smaller chunks for better code splitting
-// Implements lazy loading and progressive enhancement
-// =====================================================
-
 import React, { Suspense, lazy } from 'react';
-import { dashboardStats } from '@/data/mockData';
 
 // Lazy load heavy components
 const HeroHeader = lazy(() => import('./HeroHeader').then(module => ({ 
   default: module.HeroHeader 
 })));
-const MobileHeroHeader = lazy(() => import('./HeroHeader').then(module => ({ 
-  default: module.MobileHeroHeader 
-})));
-const CompactHeroHeader = lazy(() => import('./HeroHeader').then(module => ({ 
-  default: module.CompactHeroHeader 
-})));
 const HeroStats = lazy(() => import('./HeroStats').then(module => ({ 
   default: module.HeroStats 
-})));
-const LightVideoPreview = lazy(() => import('./HeroVideo').then(module => ({ 
-  default: module.LightVideoPreview 
-})));
-const StaticVideoPreview = lazy(() => import('./HeroVideo').then(module => ({ 
-  default: module.StaticVideoPreview 
 })));
 const RiskDistributionStats = lazy(() => import('./HeroStats').then(module => ({ 
   default: module.RiskDistributionStats 
@@ -33,36 +13,38 @@ const RiskDistributionStats = lazy(() => import('./HeroStats').then(module => ({
 
 export function HeroSection() {
   return (
-    <div className="h-full flex flex-col justify-center">
-      {/* Main Hero Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
-        {/* Left - Messaging */}
-        <Suspense fallback={<HeroHeaderSkeleton />}>
+    // Added 'min-h-full' to ensure it fills the parent h-screen container
+    // Added 'justify-center items-center text-center' for global centering
+    <div className="min-h-full flex flex-col justify-center items-center text-center max-w-5xl mx-auto py-12">
+      
+      {/* Main Hero Content - Centered */}
+      <div className="w-full mb-8 flex flex-col items-center">
+        <Suspense fallback={<div className="h-64 w-full animate-pulse bg-neutral-100 rounded-xl" />}>
           <HeroHeader />
         </Suspense>
       </div>
 
       {/* Hero Statistics */}
-      <div className="mb-12">
-        <Suspense fallback={<StatsSkeleton />}>
+      <div className="w-full mb-8">
+        <Suspense fallback={<div className="h-32 w-full animate-pulse bg-neutral-100 rounded-xl" />}>
           <HeroStats />
         </Suspense>
       </div>
 
       {/* Risk Level Distribution */}
-      <div className="mb-12">
-        <Suspense fallback={<RiskStatsSkeleton />}>
+      <div className="w-full mb-6">
+        <Suspense fallback={<div className="h-48 w-full animate-pulse bg-neutral-100 rounded-xl" />}>
           <RiskDistributionStats />
         </Suspense>
       </div>
 
       {/* System Status Bar */}
-      <SystemStatusBar />
+      <div className="w-full max-w-2xl">
+        <SystemStatusBar />
+      </div>
     </div>
   );
-}
-
-// Skeleton components for loading states
+}// Skeleton components for loading states
 function HeroHeaderSkeleton() {
   return (
     <div className="space-y-8 animate-pulse">
@@ -119,14 +101,14 @@ function RiskStatsSkeleton() {
 // System Status Bar Component
 function SystemStatusBar() {
   return (
-    <div className="bg-surface-tertiary border border-surface-border rounded-lg p-4">
+    <div className="bg-surface-tertiary border border-surface-border rounded-lg p-4 mx-auto shadow-sm">
       <div className="flex items-center justify-between flex-wrap gap-4">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 mx-auto sm:mx-0">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-risk-low-base animate-pulse"></div>
-            <span className="text-caption text-text-muted uppercase tracking-wider">System Online</span>
+            <span className="text-caption text-text-muted uppercase tracking-wider font-semibold">System Online</span>
           </div>
-          <div className="text-caption text-text-dim">
+          <div className="text-caption text-text-dim hidden sm:block">
             Last Update: {new Date().toLocaleString('en-US', { 
               hour: '2-digit', 
               minute: '2-digit',
@@ -137,12 +119,12 @@ function SystemStatusBar() {
             })}
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <span className="text-caption text-text-muted">Data Freshness:</span>
+        <div className="flex items-center gap-4 mx-auto sm:mx-0">
+          <span className="text-caption text-text-muted font-medium">Data Freshness:</span>
           <div className="w-32 h-2 bg-surface-border rounded-full overflow-hidden">
             <div className="w-5/6 h-full bg-accent-navy rounded-full"></div>
           </div>
-          <span className="text-caption text-accent-navy font-semibold">83%</span>
+          <span className="text-caption text-accent-navy font-bold">98.2%</span>
         </div>
       </div>
     </div>

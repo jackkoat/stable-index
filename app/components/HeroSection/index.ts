@@ -5,10 +5,10 @@
 // =====================================================
 
 // Main components
-export { HeroSection, MobileHeroSection, CompactHeroSection } from './HeroSection';
+export { HeroSection } from './HeroSection';
 
 // Sub-components for flexible imports
-export { HeroHeader, MobileHeroHeader, CompactHeroHeader } from './HeroHeader';
+export { HeroHeader } from './HeroHeader';
 export { HeroStats, DetailedHeroStats, RiskDistributionStats } from './HeroStats';
 export { LightVideoPreview, StaticVideoPreview } from './HeroVideo';
 
