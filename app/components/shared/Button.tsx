@@ -30,11 +30,11 @@ export function Button({
   const baseClasses = "inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
   
   const variantClasses = {
-    primary: "bg-accent-navy text-white hover:bg-accent-navy/90 focus:ring-accent-navy",
-    secondary: "bg-surface-tertiary text-text-primary hover:bg-surface-tertiary/80 focus:ring-text-muted",
-    outline: "border border-accent-navy text-accent-navy hover:bg-accent-navy/10 focus:ring-accent-navy",
+    primary: "bg-accent-navy text-white hover:bg-accent-navy/90 focus:ring-accent-navy shadow-sm",
+    secondary: "bg-surface-tertiary text-text-primary hover:bg-surface-tertiary/80 focus:ring-text-muted border border-surface-border",
+    outline: "border-2 border-accent-navy text-accent-navy hover:bg-accent-navy/10 focus:ring-accent-navy bg-white/50",
     ghost: "text-text-secondary hover:bg-surface-tertiary/50 hover:text-text-primary focus:ring-text-muted",
-    danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500"
+    danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 shadow-sm"
   };
   
   const sizeClasses = {

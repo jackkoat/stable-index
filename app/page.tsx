@@ -74,36 +74,57 @@ export default function HomePage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen"
+      className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
     >
       {/* Hero/Overview Section */}
-      <motion.section variants={itemVariants} id="overview">
-        <HeroSection />
+      <motion.section 
+        variants={itemVariants} 
+        id="overview"
+        className="py-20 px-8"
+      >
+        <div className="max-w-[1600px] mx-auto">
+          <HeroSection />
+        </div>
       </motion.section>
 
       {/* Stats Overview */}
-      <motion.section variants={itemVariants}>
-        {dashboardStats && <StatsOverview dashboardStats={dashboardStats} />}
+      <motion.section 
+        variants={itemVariants}
+        className="py-16 px-8"
+      >
+        <div className="max-w-[1600px] mx-auto">
+          {dashboardStats && <StatsOverview dashboardStats={dashboardStats} />}
+        </div>
       </motion.section>
 
       {/* Crypto Community Section - New Addition */}
-      <motion.section variants={itemVariants}>
-        <CryptoCommunitySection />
+      <motion.section 
+        variants={itemVariants}
+        className="py-16 px-8"
+      >
+        <div className="max-w-[1600px] mx-auto">
+          <CryptoCommunitySection />
+        </div>
       </motion.section>
 
       {/* Risk Legend & Export */}
-      <motion.section variants={itemVariants} className="bg-white py-16">
-        <div className="max-w-[1200px] mx-auto px-8">
+      <motion.section 
+        variants={itemVariants} 
+        className="bg-surface-secondary py-20 px-8"
+      >
+        <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, y: -4 }}
               transition={{ duration: 0.2 }}
+              className="data-card"
             >
               <RiskLegend />
             </motion.div>
             <motion.div
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, y: -4 }}
               transition={{ duration: 0.2 }}
+              className="data-card"
             >
               <ExportButton data={countriesData} />
             </motion.div>
