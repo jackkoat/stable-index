@@ -62,7 +62,8 @@ export default function DashboardPage() {
               </p>
             </motion.div>
 
-            {/* World Map Section */}
+            {/* World Map Section - Temporarily commented out for debugging */}
+            {/*
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -93,6 +94,7 @@ export default function DashboardPage() {
                 selectedCountry={selectedCountry}
               />
             </motion.div>
+            */}
 
             {/* Dashboard Stats */}
             {dashboardStats && (
