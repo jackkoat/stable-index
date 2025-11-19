@@ -80,7 +80,7 @@ export default function HomePage() {
       <motion.section 
         variants={itemVariants} 
         id="overview"
-        className="py-16 px-4"
+        className="h-screen px-4 flex items-center"
       >
         <div className="max-w-[1600px] mx-auto">
           <HeroSection />

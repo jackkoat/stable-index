@@ -13,55 +13,6 @@ interface HeroVideoProps {
   showControls?: boolean;
 }
 
-export function HeroVideo({ 
-  className = "", 
-  interactive = true,
-  showControls = true 
-}: HeroVideoProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div className="relative">
-      <div 
-        className={`
-          aspect-video bg-surface-tertiary border border-surface-border rounded-lg overflow-hidden 
-          relative group cursor-pointer hover:border-accent-cyan/30 transition-colors duration-normal
-          ${className}
-        `}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Video Background Simulation */}
-        <DashboardPreview />
-        
-        {/* Play Overlay */}
-        {interactive && (
-          <div className={`
-            absolute inset-0 flex items-center justify-center bg-dark-50/40 
-            transition-opacity duration-normal
-            ${isHovered ? 'opacity-100' : 'opacity-0'}
-          `}>
-            <div className="w-16 h-16 bg-accent-cyan rounded-full flex items-center justify-center shadow-glow-md">
-              <svg className="w-8 h-8 text-dark-50 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </div>
-        )}
-
-        {/* Label */}
-        <div className="absolute bottom-3 left-3 bg-dark-50/80 backdrop-blur-sm text-text-primary text-caption 
-                      px-3 py-1.5 rounded font-semibold uppercase tracking-wider">
-          Interactive Preview
-        </div>
-      </div>
-      
-      {/* Decorative Glow */}
-      <div className="absolute -inset-4 bg-accent-cyan/5 blur-3xl -z-10"></div>
-    </div>
-  );
-}
-
 // Dashboard Preview Component
 function DashboardPreview() {
   const chartData = [35, 50, 45, 70, 55, 80, 65, 45, 60, 75, 50, 85];

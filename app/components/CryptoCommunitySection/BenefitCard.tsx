@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, AlertTriangle, Scale, Link, TrendingUp, Briefcase } from 'lucide-react';
+import { Activity, Zap, Shield, Network, TrendingUp, PieChart } from 'lucide-react';
 
 export interface BenefitItem {
   title: string;
@@ -10,12 +10,12 @@ export interface BenefitItem {
 }
 
 const iconMap = {
-  BarChart3,
-  AlertTriangle,
-  Scale,
-  Link,
+  Activity,
+  Zap,
+  Shield,
+  Network,
   TrendingUp,
-  Briefcase
+  PieChart
 };
 
 interface BenefitCardProps {
@@ -35,7 +35,7 @@ interface BenefitCardProps {
 }
 
 export const BenefitCard = React.memo<BenefitCardProps>(({ benefit, index, variants }) => {
-  const IconComponent = iconMap[benefit.icon as keyof typeof iconMap] || BarChart3;
+  const IconComponent = iconMap[benefit.icon as keyof typeof iconMap] || Activity;
 
   return (
     <motion.div

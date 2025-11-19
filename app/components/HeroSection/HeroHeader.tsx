@@ -16,7 +16,6 @@ interface HeroHeaderProps {
 
 // Lazy load heavy components
 const Button = lazy(() => import('../shared/Button').then(module => ({ default: module.Button })));
-const VideoPreview = lazy(() => import('./HeroVideo').then(module => ({ default: module.HeroVideo })));
 
 export function HeroHeader({ className = "" }: HeroHeaderProps) {
   const [user, setUser] = useState<any>(null);

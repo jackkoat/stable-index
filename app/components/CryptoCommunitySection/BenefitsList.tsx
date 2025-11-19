@@ -6,25 +6,25 @@ export const benefits: BenefitItem[] = [
   {
     title: "Risk Assessment for Investment Timing",
     description: "Use URI scores to identify optimal entry and exit points for crypto investments based on country stability indicators.",
-    icon: "BarChart3",
+    icon: "Activity",
     color: "from-navy-500 to-navy-600"
   },
   {
     title: "Early Warning System",
     description: "Receive alerts before market crashes by monitoring social unrest indicators that correlate with crypto market volatility.",
-    icon: "AlertTriangle",
+    icon: "Zap",
     color: "from-navy-400 to-navy-500"
   },
   {
     title: "Government Policy Prediction",
     description: "Predict potential bans and restrictions by analyzing political stability scores across different regions.",
-    icon: "Scale",
+    icon: "Shield",
     color: "from-navy-600 to-navy-700"
   },
   {
     title: "DeFi Integration Support",
     description: "Make informed decisions for yield farming and protocol participation based on regional risk factors.",
-    icon: "Link",
+    icon: "Network",
     color: "from-navy-300 to-navy-400"
   },
   {
@@ -36,7 +36,7 @@ export const benefits: BenefitItem[] = [
   {
     title: "Portfolio Risk Management",
     description: "Develop comprehensive risk management strategies by diversifying across countries with different stability scores.",
-    icon: "Briefcase",
+    icon: "PieChart",
     color: "from-navy-800 to-navy-900"
   }
 ];

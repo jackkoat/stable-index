@@ -21,9 +21,6 @@ const CompactHeroHeader = lazy(() => import('./HeroHeader').then(module => ({
 const HeroStats = lazy(() => import('./HeroStats').then(module => ({ 
   default: module.HeroStats 
 })));
-const HeroVideo = lazy(() => import('./HeroVideo').then(module => ({ 
-  default: module.HeroVideo 
-})));
 const LightVideoPreview = lazy(() => import('./HeroVideo').then(module => ({ 
   default: module.LightVideoPreview 
 })));
@@ -36,29 +33,28 @@ const RiskDistributionStats = lazy(() => import('./HeroStats').then(module => ({
 
 export function HeroSection() {
   return (
-    <div className="space-y-12">
+    <div className="h-full flex flex-col justify-center">
       {/* Main Hero Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
         {/* Left - Messaging */}
         <Suspense fallback={<HeroHeaderSkeleton />}>
           <HeroHeader />
         </Suspense>
-
-        {/* Right - Video Preview */}
-        <Suspense fallback={<VideoSkeleton />}>
-          <HeroVideo />
-        </Suspense>
       </div>
 
       {/* Hero Statistics */}
-      <Suspense fallback={<StatsSkeleton />}>
-        <HeroStats />
-      </Suspense>
+      <div className="mb-12">
+        <Suspense fallback={<StatsSkeleton />}>
+          <HeroStats />
+        </Suspense>
+      </div>
 
       {/* Risk Level Distribution */}
-      <Suspense fallback={<RiskStatsSkeleton />}>
-        <RiskDistributionStats />
-      </Suspense>
+      <div className="mb-12">
+        <Suspense fallback={<RiskStatsSkeleton />}>
+          <RiskDistributionStats />
+        </Suspense>
+      </div>
 
       {/* System Status Bar */}
       <SystemStatusBar />
