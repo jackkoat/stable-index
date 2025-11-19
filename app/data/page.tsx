@@ -5,6 +5,16 @@ import { Navigation } from '@/components/Navigation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { allCountriesData } from '@/data/mockData';
 import { CountryData } from '@/types/index';
+import ReactCountryFlag from 'react-country-flag';
+
+// Mapping from ISO 3166-1 alpha-3 to alpha-2 codes for flag-icons
+const alpha3ToAlpha2: Record<string, string> = {
+  'ARG': 'AR', 'AUS': 'AU', 'BEL': 'BE', 'BRA': 'BR', 'CAN': 'CA',
+  'CHE': 'CH', 'CHN': 'CN', 'DEU': 'DE', 'ESP': 'ES', 'FRA': 'FR',
+  'GBR': 'GB', 'IDN': 'ID', 'IND': 'IN', 'ITA': 'IT', 'JPN': 'JP',
+  'KOR': 'KR', 'MEX': 'MX', 'NLD': 'NL', 'NPL': 'NP', 'POL': 'PL',
+  'RUS': 'RU', 'SAU': 'SA', 'SWE': 'SE', 'TUR': 'TR', 'USA': 'US'
+};
 
 export default function DataPage() {
   return (
@@ -58,7 +68,11 @@ export default function DataPage() {
                     <tr key={country.country.code} className="border-b border-surface-border hover:bg-surface-secondary/20 transition-colors">
                       <td className="py-4 px-6">
                         <div className="flex items-center">
-                          <span className="text-2xl mr-3">{country.country.flag_emoji}</span>
+                          <ReactCountryFlag 
+                            countryCode={alpha3ToAlpha2[country.country.code] || country.country.code} 
+                            svg 
+                            style={{ width: '1.5em', height: '1.5em', marginRight: '0.75rem' }}
+                          />
                           <span className="text-body font-medium text-text-primary">{country.country.name}</span>
                         </div>
                       </td>
