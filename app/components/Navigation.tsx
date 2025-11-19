@@ -34,6 +34,8 @@ export const Navigation = ({ userName, userCountry, onLogout }: NavigationProps)
   const navItems = [
     { label: 'Home', path: '/', active: pathname === '/' },
     { label: 'Dashboard', path: '/dashboard', active: pathname === '/dashboard' },
+    { label: 'Countries', path: '/countries', active: pathname === '/countries' },
+    { label: 'Data', path: '/data', active: pathname === '/data' },
     { label: 'About', path: '/about', active: pathname === '/about' }
   ];
 
