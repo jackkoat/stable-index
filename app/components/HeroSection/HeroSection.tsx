@@ -6,7 +6,7 @@
 // =====================================================
 
 import React, { Suspense, lazy } from 'react';
-import { dashboardStats } from '../../data/mockData';
+import { dashboardStats } from '@/data/mockData';
 
 // Lazy load heavy components
 const HeroHeader = lazy(() => import('./HeroHeader').then(module => ({ 

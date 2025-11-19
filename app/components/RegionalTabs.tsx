@@ -4,7 +4,7 @@
 // Simple regional filtering without emojis
 // =====================================================
 
-import { regions } from '../data/mockData';
+import { regions } from '@/data/mockData';
 
 interface RegionalTabsProps {
   selectedRegion: string;
