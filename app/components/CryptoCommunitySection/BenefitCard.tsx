@@ -38,7 +38,7 @@ export const BenefitCard = React.memo<BenefitCardProps>(({ benefit, index }) => 
             hover: { 
               y: -12, // Pop up effect
               scale: 1.1, 
-              rotate: [0, -3, 3, 0], // Subtle wobble
+              rotate: [0, -3], // Subtle rotation (only 2 keyframes for spring)
               boxShadow: "0px 15px 20px -5px rgba(0, 0, 0, 0.1)"
             }
           }}

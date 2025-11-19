@@ -15,7 +15,7 @@ export function HeroSection() {
   return (
     // Added 'min-h-full' to ensure it fills the parent h-screen container
     // Added 'justify-center items-center text-center' for global centering
-    <div className="min-h-full flex flex-col justify-center items-center text-center max-w-5xl mx-auto py-12">
+    <div className="min-h-full flex flex-col justify-start items-center text-center max-w-5xl mx-auto py-12 pt-96 md:pt-96">
       
       {/* Main Hero Content - Centered */}
       <div className="w-full mb-8 flex flex-col items-center">
@@ -127,46 +127,6 @@ function SystemStatusBar() {
           <span className="text-caption text-accent-navy font-bold">98.2%</span>
         </div>
       </div>
-    </div>
-  );
-}
-
-// Mobile-optimized Hero Section
-export function MobileHeroSection() {
-  return (
-    <div className="space-y-8">
-      <Suspense fallback={<HeroHeaderSkeleton />}>
-        <MobileHeroHeader />
-      </Suspense>
-
-      <Suspense fallback={<VideoSkeleton />}>
-        <LightVideoPreview />
-      </Suspense>
-
-      <Suspense fallback={<StatsSkeleton />}>
-        <HeroStats compact />
-      </Suspense>
-    </div>
-  );
-}
-
-// Compact version for small spaces
-export function CompactHeroSection() {
-  return (
-    <div className="space-y-6">
-      <Suspense fallback={<HeroHeaderSkeleton />}>
-        <CompactHeroHeader />
-      </Suspense>
-
-      <div className="flex justify-center">
-        <Suspense fallback={<VideoSkeleton />}>
-          <StaticVideoPreview />
-        </Suspense>
-      </div>
-
-      <Suspense fallback={<StatsSkeleton />}>
-        <HeroStats compact />
-      </Suspense>
     </div>
   );
 }
