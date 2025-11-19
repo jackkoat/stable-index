@@ -1,0 +1,206 @@
+// =====================================================
+// Enhanced Mock Data untuk 25 Countries
+// =====================================================
+// Data complete dari research untuk 25 negara
+// Includes: URI scores, risk levels, all indicators
+// =====================================================
+
+import { CountryData, RiskLevel } from '../types';
+
+// Regional groupings
+export const regions = {
+  'Asia-Pacific': ['IDN', 'JPN', 'CHN', 'IND', 'AUS', 'KOR'],
+  'Europe': ['DEU', 'GBR', 'FRA', 'ITA', 'ESP', 'NLD', 'CHE', 'SWE', 'BEL', 'POL'],
+  'Americas': ['USA', 'CAN', 'MEX', 'BRA', 'ARG'],
+  'MENA': ['SAU', 'TUR'],
+  'Other': ['RUS']
+};
+
+// All 25 countries data dari research
+const allCountriesRawData = {
+  'ARG': { name: 'Argentina', flag: '🇦🇷', yu: 21.188, fi: 32.3, pr: 2.95, cpi: 34, uri: 67.9, risk: 'High', region: 'Americas' },
+  'AUS': { name: 'Australia', flag: '🇦🇺', yu: 9.471, fi: 4.2, pr: 1.75, cpi: 77, uri: 23.9, risk: 'Low', region: 'Asia-Pacific' },
+  'BEL': { name: 'Belgium', flag: '🇧🇪', yu: 16.752, fi: 4.8, pr: 1.4, cpi: 69, uri: 28.9, risk: 'Low', region: 'Europe' },
+  'BRA': { name: 'Brazil', flag: '🇧🇷', yu: 17.95, fi: 6.66, pr: 3.25, cpi: 34, uri: 47.2, risk: 'Moderate', region: 'Americas' },
+  'CAN': { name: 'Canada', flag: '🇨🇦', yu: 12.965, fi: 3.8, pr: 1.85, cpi: 75, uri: 27.0, risk: 'Low', region: 'Americas' },
+  'CHE': { name: 'Switzerland', flag: '🇨🇭', yu: 7.94, fi: 2.1, pr: 1.3, cpi: 81, uri: 17.8, risk: 'Low', region: 'Europe' },
+  'CHN': { name: 'China', flag: '🇨🇳', yu: 15.226, fi: -2.9, pr: 2.25, cpi: 43, uri: 30.0, risk: 'Low', region: 'Asia-Pacific' },
+  'DEU': { name: 'Germany', flag: '🇩🇪', yu: 6.7, fi: 3.8, pr: 1.25, cpi: 75, uri: 19.0, risk: 'Low', region: 'Europe' },
+  'ESP': { name: 'Spain', flag: '🇪🇸', yu: 27.009, fi: 4.1, pr: 1.55, cpi: 56, uri: 38.6, risk: 'Low', region: 'Europe' },
+  'FRA': { name: 'France', flag: '🇫🇷', yu: 16.57, fi: 3.5, pr: 1.45, cpi: 67, uri: 28.3, risk: 'Low', region: 'Europe' },
+  'GBR': { name: 'United Kingdom', flag: '🇬🇧', yu: 12.444, fi: 4.2, pr: 1.65, cpi: 71, uri: 26.4, risk: 'Low', region: 'Europe' },
+  'IDN': { name: 'Indonesia', flag: '🇮🇩', yu: 13.141, fi: 4.99, pr: 5.1, cpi: 37, uri: 46.1, risk: 'Moderate', region: 'Asia-Pacific' },
+  'IND': { name: 'India', flag: '🇮🇳', yu: 16.028, fi: 5.0, pr: 2.85, cpi: 38, uri: 41.5, risk: 'Moderate', region: 'Asia-Pacific' },
+  'ITA': { name: 'Italy', flag: '🇮🇹', yu: 21.801, fi: 3.7, pr: 1.35, cpi: 54, uri: 33.7, risk: 'Low', region: 'Europe' },
+  'JPN': { name: 'Japan', flag: '🇯🇵', yu: 3.925, fi: 6.7, pr: 1.15, cpi: 71, uri: 19.5, risk: 'Low', region: 'Asia-Pacific' },
+  'KOR': { name: 'Korea, Rep.', flag: '🇰🇷', yu: 5.897, fi: 4.9, pr: 1.45, cpi: 64, uri: 22.2, risk: 'Low', region: 'Asia-Pacific' },
+  'MEX': { name: 'Mexico', flag: '🇲🇽', yu: 5.545, fi: 6.0, pr: 2.65, cpi: 26, uri: 35.4, risk: 'Low', region: 'Americas' },
+  'NLD': { name: 'Netherlands', flag: '🇳🇱', yu: 8.17, fi: 4.3, pr: 1.2, cpi: 78, uri: 19.8, risk: 'Low', region: 'Europe' },
+  'NPL': { name: 'Nepal', flag: '🇳🇵', yu: 20.819, fi: -1.34, pr: 3.0, cpi: 34, uri: 41.0, risk: 'Moderate', region: 'Asia-Pacific' },
+  'POL': { name: 'Poland', flag: '🇵🇱', yu: 9.875, fi: 5.0, pr: 1.75, cpi: 53, uri: 28.5, risk: 'Low', region: 'Europe' },
+  'RUS': { name: 'Russian Federation', flag: '🇷🇺', yu: 9.252, fi: 11.91, pr: 2.45, cpi: 22, uri: 42.6, risk: 'Moderate', region: 'Other' },
+  'SAU': { name: 'Saudi Arabia', flag: '🇸🇦', yu: 13.773, fi: 3.5, pr: 2.15, cpi: 68, uri: 30.1, risk: 'Low', region: 'MENA' },
+  'SWE': { name: 'Sweden', flag: '🇸🇪', yu: 23.766, fi: 4.9, pr: 1.15, cpi: 80, uri: 31.1, risk: 'Low', region: 'Europe' },
+  'TUR': { name: 'Turkiye', flag: '🇹🇷', yu: 15.567, fi: 30.2, pr: 2.85, cpi: 34, uri: 63.2, risk: 'High', region: 'MENA' },
+  'USA': { name: 'United States', flag: '🇺🇸', yu: 9.389, fi: 3.1, pr: 2.45, cpi: 65, uri: 28.7, risk: 'Low', region: 'Americas' }
+};
+
+// Helper functions for normalization
+const normalizeYU = (raw: number) => {
+  const norm = ((raw - 2) / (50 - 2)) * 100;
+  return Math.max(0, Math.min(100, norm));
+};
+
+const normalizeFI = (raw: number) => {
+  const norm = ((raw - (-5)) / (30 - (-5))) * 100;
+  return Math.max(0, Math.min(100, norm));
+};
+
+const normalizePR = (raw: number) => {
+  const norm = ((raw - 0.5) / (4.0 - 0.5)) * 100;
+  return Math.max(0, Math.min(100, norm));
+};
+
+const normalizeCPI = (raw: number) => 100 - raw;
+
+// Generate CountryData for all 25 countries
+export const allCountriesData: CountryData[] = Object.entries(allCountriesRawData).map(([code, data]) => ({
+  country: {
+    id: `${code.toLowerCase()}-id`,
+    code,
+    name: data.name,
+    flag_emoji: data.flag,
+    created_at: new Date().toISOString(),
+  },
+  current_uri: {
+    id: `uri-${code.toLowerCase()}`,
+    country_id: `${code.toLowerCase()}-id`,
+    uri_score: parseFloat(data.uri.toFixed(2)),
+    risk_level: data.risk as RiskLevel,
+    youth_unemployment_raw: data.yu,
+    youth_unemployment_norm: parseFloat(normalizeYU(data.yu).toFixed(2)),
+    food_inflation_raw: data.fi,
+    food_inflation_norm: parseFloat(normalizeFI(data.fi).toFixed(2)),
+    palma_ratio_raw: data.pr,
+    palma_ratio_norm: parseFloat(normalizePR(data.pr).toFixed(2)),
+    cpi_raw: data.cpi,
+    cpi_norm: parseFloat(normalizeCPI(data.cpi).toFixed(2)),
+    calculation_date: new Date().toISOString(),
+    created_at: new Date().toISOString(),
+  },
+  indicators: {
+    youth_unemployment: {
+      id: `iv-${code.toLowerCase()}-yu`,
+      country_id: `${code.toLowerCase()}-id`,
+      indicator_id: 'ind-yu',
+      raw_value: data.yu,
+      normalized_value: parseFloat(normalizeYU(data.yu).toFixed(2)),
+      measurement_date: '2024-01-01',
+      data_source: 'World Bank / ILO',
+      created_at: new Date().toISOString(),
+    },
+    food_inflation: {
+      id: `iv-${code.toLowerCase()}-fi`,
+      country_id: `${code.toLowerCase()}-id`,
+      indicator_id: 'ind-fi',
+      raw_value: data.fi,
+      normalized_value: parseFloat(normalizeFI(data.fi).toFixed(2)),
+      measurement_date: '2024-10-01',
+      data_source: 'Trading Economics / WB',
+      created_at: new Date().toISOString(),
+    },
+    palma_ratio: {
+      id: `iv-${code.toLowerCase()}-pr`,
+      country_id: `${code.toLowerCase()}-id`,
+      indicator_id: 'ind-pr',
+      raw_value: data.pr,
+      normalized_value: parseFloat(normalizePR(data.pr).toFixed(2)),
+      measurement_date: '2023-01-01',
+      data_source: 'WID.world / OECD',
+      created_at: new Date().toISOString(),
+    },
+    corruption_index: {
+      id: `iv-${code.toLowerCase()}-cpi`,
+      country_id: `${code.toLowerCase()}-id`,
+      indicator_id: 'ind-cpi',
+      raw_value: data.cpi,
+      normalized_value: parseFloat(normalizeCPI(data.cpi).toFixed(2)),
+      measurement_date: '2024-01-01',
+      data_source: 'Transparency International',
+      created_at: new Date().toISOString(),
+    },
+  },
+  trend: Math.random() > 0.5 ? 'up' : 'down',
+  trend_value: parseFloat((Math.random() * 3).toFixed(1)),
+}));
+
+// Original 3 countries for backward compatibility
+export const mockCountriesData = allCountriesData.filter(c => 
+  ['IDN', 'NPL', 'JPN'].includes(c.country.code)
+);
+
+// Mock historical data (generated for all 25 countries)
+export const mockHistoricalData: any[] = [];
+const now = new Date();
+
+allCountriesData.forEach(({ country, current_uri }) => {
+  for (let i = 11; i >= 0; i--) {
+    const date = new Date(now);
+    date.setMonth(date.getMonth() - i);
+    const dateStr = date.toISOString().split('T')[0];
+    
+    mockHistoricalData.push({
+      date: dateStr,
+      uri_score: current_uri.uri_score + (Math.random() - 0.5) * 5,
+      country_code: country.code,
+    });
+  }
+});
+
+export const mockIndicatorMetadata = [
+  {
+    code: 'YU',
+    name: 'Youth Unemployment Rate (15-24)',
+    weight: 35,
+    description: 'Percentage of youth labor force that is unemployed',
+  },
+  {
+    code: 'FI',
+    name: 'Food Inflation Rate',
+    weight: 30,
+    description: 'Annual percentage change in food prices',
+  },
+  {
+    code: 'PR',
+    name: 'Palma Ratio',
+    weight: 20,
+    description: 'Income share of top 10% divided by bottom 40%',
+  },
+  {
+    code: 'CPI',
+    name: 'Corruption Perception Index',
+    weight: 15,
+    description: 'Transparency International CPI score (inverted)',
+  },
+];
+
+// Helper function untuk get countries by region
+export const getCountriesByRegion = (region: string): CountryData[] => {
+  const countryCodes = regions[region as keyof typeof regions] || [];
+  return allCountriesData.filter(c => countryCodes.includes(c.country.code));
+};
+
+// Helper function untuk get countries by risk level
+export const getCountriesByRiskLevel = (riskLevel: RiskLevel): CountryData[] => {
+  return allCountriesData.filter(c => c.current_uri.risk_level === riskLevel);
+};
+
+// Statistics untuk dashboard
+export const dashboardStats = {
+  total_countries: 25,
+  low_risk: allCountriesData.filter(c => c.current_uri.risk_level === 'Low').length,
+  moderate_risk: allCountriesData.filter(c => c.current_uri.risk_level === 'Moderate').length,
+  high_risk: allCountriesData.filter(c => c.current_uri.risk_level === 'High').length,
+  critical_risk: allCountriesData.filter(c => c.current_uri.risk_level === 'Critical').length,
+  avg_uri_score: parseFloat((allCountriesData.reduce((sum, c) => sum + c.current_uri.uri_score, 0) / 25).toFixed(2)),
+};

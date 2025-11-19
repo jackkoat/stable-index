@@ -1,0 +1,104 @@
+// =====================================================
+// Stable Index Country Card
+// =====================================================
+// Professional Light Theme Data Display
+// Institutional Risk Analysis Design
+// =====================================================
+
+import { CountryData } from '../types';
+import { RiskBadge } from './RiskBadge';
+import { formatNumber, getTrendIcon, getTrendColor, getTimeAgo } from '../lib/utils';
+
+interface CountryCardProps {
+  data: CountryData;
+  onClick?: (e?: React.MouseEvent) => void;
+  isSelected?: boolean;
+}
+
+export const CountryCard = ({ data, onClick, isSelected = false }: CountryCardProps) => {
+  const { country, current_uri, indicators, trend, trend_value } = data;
+
+  return (
+    <div 
+      onClick={onClick}
+      className={`
+        data-card-elevated
+        hover:border-accent-navy/40 hover:shadow-lg
+        transition-all duration-normal
+        ${onClick ? 'cursor-pointer' : ''}
+        ${isSelected ? 'border-accent-navy shadow-md' : ''}
+      `}
+    >
+      {/* Country Header */}
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-surface-border">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">{country.flag_emoji}</span>
+          <div>
+            <h3 className="text-heading-sm font-bold text-text-primary tracking-tight">
+              {country.name.toUpperCase()}
+            </h3>
+            <p className="text-micro text-text-dim uppercase tracking-wider">
+              {country.code}
+            </p>
+          </div>
+        </div>
+        <div className={`flex items-center gap-1.5 text-body-md font-semibold ${getTrendColor(trend)}`}>
+          <span className="text-lg">{getTrendIcon(trend)}</span>
+          <span>{formatNumber(Math.abs(trend_value), 1)}</span>
+        </div>
+      </div>
+
+      {/* Skor Stable Index */}
+      <div className="text-center mb-8">
+        <div className="label-uppercase mb-2">SI Score</div>
+        <div className="text-display-lg font-bold text-accent-navy mb-4">
+          {formatNumber(current_uri.uri_score)}
+        </div>
+        <div className="flex justify-center">
+          <RiskBadge level={current_uri.risk_level} size="regular" />
+        </div>
+      </div>
+
+      {/* Indicators Grid */}
+      <div className="space-y-3 mb-6">
+        <div className="bg-surface-tertiary/50 rounded px-4 py-3">
+          <div className="flex justify-between items-center">
+            <span className="text-body-md text-text-secondary">Youth Unemployment</span>
+            <span className="text-body font-bold text-text-primary">
+              {formatNumber(indicators.youth_unemployment.raw_value, 1)}%
+            </span>
+          </div>
+        </div>
+        <div className="bg-surface-tertiary/50 rounded px-4 py-3">
+          <div className="flex justify-between items-center">
+            <span className="text-body-md text-text-secondary">Food Inflation</span>
+            <span className="text-body font-bold text-text-primary">
+              {formatNumber(indicators.food_inflation.raw_value, 2)}%
+            </span>
+          </div>
+        </div>
+        <div className="bg-surface-tertiary/50 rounded px-4 py-3">
+          <div className="flex justify-between items-center">
+            <span className="text-body-md text-text-secondary">Palma Ratio</span>
+            <span className="text-body font-bold text-text-primary">
+              {formatNumber(indicators.palma_ratio.raw_value, 1)}
+            </span>
+          </div>
+        </div>
+        <div className="bg-surface-tertiary/50 rounded px-4 py-3">
+          <div className="flex justify-between items-center">
+            <span className="text-body-md text-text-secondary">Corruption Index</span>
+            <span className="text-body font-bold text-text-primary">
+              {formatNumber(indicators.corruption_index.raw_value, 0)}/100
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Last Updated */}
+      <div className="text-caption text-text-dim text-center pt-4 border-t border-surface-border uppercase tracking-wider">
+        Updated: {getTimeAgo(current_uri.calculation_date)}
+      </div>
+    </div>
+  );
+};

@@ -1,0 +1,331 @@
+// =====================================================
+// Interactive World Map Component
+// =====================================================
+// Displays global risk distribution with country highlighting
+// Color-coded by risk levels with hover/click interactions
+// =====================================================
+
+import { useState, useMemo } from 'react';
+import { CountryData, RiskLevel } from '../types';
+
+// Country coordinates for positioning on SVG map
+const countryCoordinates: Record<string, { x: number; y: number; width: number; height: number }> = {
+  USA: { x: 150, y: 200, width: 80, height: 50 },
+  CAN: { x: 150, y: 140, width: 80, height: 60 },
+  MEX: { x: 100, y: 250, width: 60, height: 40 },
+  BRA: { x: 220, y: 380, width: 80, height: 60 },
+  ARG: { x: 220, y: 440, width: 60, height: 40 },
+  GBR: { x: 450, y: 180, width: 30, height: 40 },
+  FRA: { x: 460, y: 200, width: 35, height: 45 },
+  DEU: { x: 480, y: 180, width: 35, height: 40 },
+  ITA: { x: 480, y: 220, width: 30, height: 50 },
+  ESP: { x: 460, y: 240, width: 40, height: 35 },
+  NLD: { x: 470, y: 170, width: 25, height: 30 },
+  SWE: { x: 480, y: 140, width: 40, height: 40 },
+  CHE: { x: 470, y: 190, width: 20, height: 30 },
+  BEL: { x: 465, y: 185, width: 20, height: 25 },
+  POL: { x: 500, y: 180, width: 40, height: 35 },
+  RUS: { x: 550, y: 140, width: 150, height: 80 },
+  CHN: { x: 700, y: 220, width: 120, height: 80 },
+  JPN: { x: 800, y: 220, width: 40, height: 60 },
+  KOR: { x: 790, y: 200, width: 30, height: 40 },
+  IND: { x: 650, y: 280, width: 70, height: 80 },
+  IDN: { x: 700, y: 360, width: 80, height: 30 },
+  AUS: { x: 750, y: 450, width: 100, height: 60 },
+  SAU: { x: 550, y: 280, width: 60, height: 50 },
+  TUR: { x: 520, y: 240, width: 50, height: 40 },
+  EGY: { x: 500, y: 300, width: 40, height: 40 },
+  ZAF: { x: 520, y: 440, width: 40, height: 60 },
+  NGA: { x: 480, y: 340, width: 40, height: 40 },
+  SGP: { x: 710, y: 320, width: 15, height: 20 },
+  THA: { x: 710, y: 300, width: 30, height: 25 }
+};
+
+// Risk level colors
+const getRiskColor = (riskLevel: RiskLevel): string => {
+  switch (riskLevel) {
+    case 'Low':
+      return '#10B981'; // Green-500
+    case 'Moderate':
+      return '#F59E0B'; // Amber-500
+    case 'High':
+      return '#F97316'; // Orange-500
+    case 'Critical':
+      return '#EF4444'; // Red-500
+    default:
+      return '#E5E7EB'; // Gray-300
+  }
+};
+
+const getRiskHoverColor = (riskLevel: RiskLevel): string => {
+  switch (riskLevel) {
+    case 'Low':
+      return '#059669'; // Green-600
+    case 'Moderate':
+      return '#D97706'; // Amber-600
+    case 'High':
+      return '#DC2626'; // Red-600
+    case 'Critical':
+      return '#B91C1C'; // Red-700
+    default:
+      return '#D1D5DB'; // Gray-400
+  }
+};
+
+interface WorldMapProps {
+  countries: CountryData[];
+  selectedCountry?: CountryData | null;
+  onCountrySelect?: (country: CountryData) => void;
+  className?: string;
+}
+
+export function WorldMap({ 
+  countries, 
+  selectedCountry, 
+  onCountrySelect, 
+  className = "" 
+}: WorldMapProps) {
+  const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; content: string } | null>(null);
+
+  // Create map data for rendering with error handling
+  const mapData = useMemo(() => {
+    try {
+      const countryMap = new Map<string, CountryData>();
+      console.log('WorldMap: Processing countries:', countries?.length || 0);
+      
+      if (countries && countries.length > 0) {
+        countries.forEach(country => {
+          if (country && country.country && country.country.code) {
+            countryMap.set(country.country.code, country);
+            console.log('WorldMap: Added country:', country.country.code, country.country.name);
+          }
+        });
+      }
+      
+      console.log('WorldMap: Total mapped countries:', countryMap.size);
+      return countryMap;
+    } catch (error) {
+      console.error('WorldMap: Error creating map data:', error);
+      return new Map<string, CountryData>();
+    }
+  }, [countries]);
+
+  const handleCountryClick = (countryCode: string) => {
+    const country = mapData.get(countryCode);
+    if (country && onCountrySelect) {
+      onCountrySelect(country);
+    }
+  };
+
+  const handleMouseEnter = (countryCode: string, event: React.MouseEvent) => {
+    const country = mapData.get(countryCode);
+    if (country) {
+      setHoveredCountry(countryCode);
+      setTooltip({
+        x: event.clientX,
+        y: event.clientY,
+        content: `${country.country.name} (${country.country.code})\nSI Score: ${country.current_uri.uri_score.toFixed(1)}\nRisk Level: ${country.current_uri.risk_level}`
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredCountry(null);
+    setTooltip(null);
+  };
+
+  const getCountryFill = (countryCode: string): string => {
+    const country = mapData.get(countryCode);
+    if (!country) return '#F3F4F6'; // Gray-100 for countries not in our dataset
+    
+    if (hoveredCountry === countryCode || selectedCountry?.country.code === countryCode) {
+      return getRiskHoverColor(country.current_uri.risk_level);
+    }
+    
+    return getRiskColor(country.current_uri.risk_level);
+  };
+
+  const getCountryStroke = (countryCode: string): string => {
+    const country = mapData.get(countryCode);
+    if (!country) return '#D1D5DB'; // Gray-300
+    
+    if (selectedCountry?.country.code === countryCode) {
+      return '#1F2937'; // Gray-800 for selected
+    }
+    
+    return hoveredCountry === countryCode ? '#374151' : '#9CA3AF'; // Darker stroke on hover
+  };
+
+  const getCountryOpacity = (countryCode: string): number => {
+    const country = mapData.get(countryCode);
+    return country ? 0.9 : 0.3; // Dim countries not in dataset
+  };
+
+  // Render fallback when no data
+  if (!countries || countries.length === 0) {
+    return (
+      <div className={`relative bg-white rounded-xl border border-neutral-200 overflow-hidden ${className}`}>
+        <div className="p-6 border-b border-neutral-200">
+          <h3 className="text-heading-md font-bold text-neutral-900 mb-2">
+            Global Risk Distribution Map
+          </h3>
+          <p className="text-body text-neutral-600">
+            No country data available for map display
+          </p>
+        </div>
+        <div className="p-6 h-96 flex items-center justify-center bg-neutral-50">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-neutral-300 border-t-accent-navy rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-body text-neutral-600">Loading country data...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative bg-white rounded-xl border border-neutral-200 overflow-hidden ${className}`}>
+      {/* Map Header */}
+      <div className="p-6 border-b border-neutral-200">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-heading-md font-bold text-neutral-900 mb-2">
+              Global Risk Distribution Map
+            </h3>
+            <p className="text-body text-neutral-600">
+              Click on countries to view detailed risk analysis
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            {/* Legend */}
+            <div className="flex items-center gap-3">
+              <span className="text-caption text-neutral-600 font-medium">Risk Level:</span>
+              {(['Low', 'Moderate', 'High', 'Critical'] as RiskLevel[]).map((level) => (
+                <div key={level} className="flex items-center gap-1">
+                  <div 
+                    className="w-3 h-3 rounded-full border border-neutral-300" 
+                    style={{ backgroundColor: getRiskColor(level) }}
+                  ></div>
+                  <span className="text-caption text-neutral-600">{level}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SVG Map */}
+      <div className="relative p-6">
+        <svg 
+          viewBox="0 0 900 500" 
+          className="w-full h-96 border border-neutral-200 rounded-lg bg-neutral-50"
+          style={{ maxHeight: '400px', minHeight: '384px' }}
+          preserveAspectRatio="xMidYMid meet"
+        >
+          {/* Background */}
+          <rect width="900" height="500" fill="#F8FAFC" />
+          
+          {/* Debug info */}
+          <text x="10" y="20" className="text-xs fill-gray-600">
+            Debug: {Object.keys(countryCoordinates).length} countries, {mapData.size} mapped
+          </text>
+          
+          {/* Render countries */}
+          {Object.entries(countryCoordinates).map(([countryCode, coords]) => {
+            const country = mapData.get(countryCode);
+            const hasData = country && typeof country === 'object';
+            
+            // Debug each country
+            if (countryCode === 'USA') {
+              console.log('USA mapping:', { hasData, country, coords });
+            }
+            
+            return (
+              <g key={countryCode}>
+                <rect
+                  x={coords.x}
+                  y={coords.y}
+                  width={coords.width}
+                  height={coords.height}
+                  fill={hasData ? getCountryFill(countryCode) : '#F3F4F6'}
+                  stroke={hasData ? getCountryStroke(countryCode) : '#D1D5DB'}
+                  strokeWidth={selectedCountry?.country.code === countryCode ? 2 : 1}
+                  opacity={hasData ? 0.9 : 0.5}
+                  rx={3}
+                  className="cursor-pointer transition-all duration-200 hover:opacity-100"
+                  onClick={() => hasData && handleCountryClick(countryCode)}
+                  onMouseEnter={(e) => hasData && handleMouseEnter(countryCode, e)}
+                  onMouseLeave={hasData ? handleMouseLeave : () => {}}
+                />
+                
+                {/* Country code label */}
+                <text
+                  x={coords.x + coords.width / 2}
+                  y={coords.y + coords.height / 2}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  className="text-xs font-medium pointer-events-none fill-white"
+                  style={{ fontSize: '10px' }}
+                >
+                  {countryCode}
+                </text>
+              </g>
+            );
+          })}
+          
+          {/* Title */}
+          <text
+            x="450"
+            y="30"
+            textAnchor="middle"
+            className="text-lg font-bold fill-neutral-700"
+          >
+            Stable Index Global Risk Map
+          </text>
+        </svg>
+        
+        {/* Tooltip */}
+        {tooltip && (
+          <div 
+            className="absolute z-50 bg-neutral-900 text-white px-3 py-2 rounded-lg shadow-lg pointer-events-none"
+            style={{ 
+              left: tooltip.x + 10, 
+              top: tooltip.y - 10,
+              transform: 'translate(-50%, -100%)'
+            }}
+          >
+            <div className="text-sm font-medium whitespace-pre-line">
+              {tooltip.content}
+            </div>
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2">
+              <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-900"></div>
+            </div>
+          </div>
+        )}
+      </div>
+      
+      {/* Map Statistics */}
+      <div className="px-6 py-4 bg-neutral-50 border-t border-neutral-200">
+        <div className="grid grid-cols-4 gap-4 text-center">
+          {(['Low', 'Moderate', 'High', 'Critical'] as RiskLevel[]).map((level) => {
+            const count = countries.filter(c => c.current_uri.risk_level === level).length;
+            return (
+              <div key={level} className="flex flex-col items-center">
+                <div className="w-8 h-8 rounded-full border-2 border-white shadow-sm" 
+                     style={{ backgroundColor: getRiskColor(level) }}>
+                </div>
+                <div className="text-heading-md font-bold text-neutral-900 mt-1">
+                  {count}
+                </div>
+                <div className="text-caption text-neutral-600 uppercase tracking-wider">
+                  {level} Risk
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}

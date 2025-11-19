@@ -1,0 +1,132 @@
+// =====================================================
+// Hero Header Component
+// =====================================================
+// Main messaging and call-to-action section
+// Optimized for lazy loading
+// =====================================================
+
+import React, { lazy, Suspense } from 'react';
+import { smoothScrollTo } from '../../lib/utils';
+
+interface HeroHeaderProps {
+  className?: string;
+}
+
+// Lazy load heavy components
+const Button = lazy(() => import('../ui/Button').then(module => ({ default: module.Button })));
+const VideoPreview = lazy(() => import('./HeroVideo'));
+
+export function HeroHeader({ className = "" }: HeroHeaderProps) {
+  return (
+    <div className={`space-y-8 ${className}`}>
+      <div className="space-y-4">
+        <div className="inline-block px-3 py-1 bg-accent-navy/10 border border-accent-navy/30 rounded text-caption 
+                      text-accent-navy uppercase tracking-wider font-semibold">
+          Live Intelligence Platform
+        </div>
+        
+        <h1 className="text-heading-xl font-bold text-text-primary leading-tight">
+          Real-Time Global Risk Intelligence
+        </h1>
+        
+        <p className="text-body-lg text-text-secondary leading-relaxed">
+          Monitor social stability indicators across 25 countries with professional analysis 
+          and predictive threat detection.
+        </p>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex flex-wrap gap-4">
+        <Suspense fallback={<ButtonSkeleton />}>
+          <Button
+            onClick={() => smoothScrollTo('details')}
+            variant="primary"
+            icon="chart"
+          >
+            View Risk Analysis
+          </Button>
+        </Suspense>
+        
+        <Suspense fallback={<ButtonSkeleton />}>
+          <Button
+            onClick={() => smoothScrollTo('trends')}
+            variant="secondary"
+            icon="trending"
+          >
+            Historical Trends
+          </Button>
+        </Suspense>
+      </div>
+    </div>
+  );
+}
+
+// Button skeleton for loading state
+function ButtonSkeleton() {
+  return (
+    <div className="flex items-center gap-2 px-6 py-3 bg-neutral-200 rounded-lg animate-pulse">
+      <div className="w-5 h-5 bg-neutral-300 rounded"></div>
+      <div className="w-32 h-4 bg-neutral-300 rounded"></div>
+    </div>
+  );
+}
+
+// Simplified header for mobile
+export function MobileHeroHeader({ className = "" }: HeroHeaderProps) {
+  return (
+    <div className={`space-y-6 ${className}`}>
+      <div className="space-y-3">
+        <div className="inline-block px-2 py-1 bg-accent-navy/10 border border-accent-navy/30 rounded text-micro 
+                      text-accent-navy uppercase tracking-wider font-semibold">
+          Live Intelligence
+        </div>
+        
+        <h1 className="text-heading-lg font-bold text-text-primary leading-tight">
+          Global Risk Intelligence
+        </h1>
+        
+        <p className="text-body text-text-secondary leading-relaxed">
+          Monitor stability indicators across 25 countries
+        </p>
+      </div>
+
+      {/* Simplified Action Buttons */}
+      <div className="flex flex-col gap-3">
+        <button 
+          onClick={() => smoothScrollTo('details')}
+          className="btn-primary w-full"
+        >
+          View Analysis
+        </button>
+        <button 
+          onClick={() => smoothScrollTo('trends')}
+          className="btn-secondary w-full"
+        >
+          Trends
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Compact header for small spaces
+export function CompactHeroHeader({ className = "" }: HeroHeaderProps) {
+  return (
+    <div className={`space-y-4 ${className}`}>
+      <h1 className="text-heading-md font-bold text-text-primary">
+        Risk Intelligence Platform
+      </h1>
+      
+      <p className="text-body text-text-secondary">
+        Real-time stability monitoring across 25 countries
+      </p>
+
+      <button 
+        onClick={() => smoothScrollTo('details')}
+        className="btn-primary"
+      >
+        Explore Platform
+      </button>
+    </div>
+  );
+}
