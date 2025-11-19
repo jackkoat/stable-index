@@ -5,8 +5,9 @@
 // Optimized for lazy loading
 // =====================================================
 
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 import { smoothScrollTo } from '@/lib/utils';
 
 interface HeroHeaderProps {
@@ -18,6 +19,16 @@ const Button = lazy(() => import('../shared/Button').then(module => ({ default: 
 const VideoPreview = lazy(() => import('./HeroVideo').then(module => ({ default: module.HeroVideo })));
 
 export function HeroHeader({ className = "" }: HeroHeaderProps) {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, []);
+
   return (
     <div className={`space-y-8 ${className}`}>
       <div className="space-y-4">
@@ -39,14 +50,25 @@ export function HeroHeader({ className = "" }: HeroHeaderProps) {
       {/* Action Buttons */}
       <div className="flex flex-wrap gap-4">
         <Suspense fallback={<ButtonSkeleton />}>
-          <Link href="/login">
-            <Button
-              variant="primary"
-              icon="log-in"
-            >
-              Get Started
-            </Button>
-          </Link>
+          {user ? (
+            <Link href="/dashboard">
+              <Button
+                variant="primary"
+                icon="chart"
+              >
+                Go to Dashboard
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <Button
+                variant="primary"
+                icon="arrow"
+              >
+                Get Started
+              </Button>
+            </Link>
+          )}
         </Suspense>
       </div>
     </div>
@@ -65,6 +87,16 @@ function ButtonSkeleton() {
 
 // Simplified header for mobile
 export function MobileHeroHeader({ className = "" }: HeroHeaderProps) {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, []);
+
   return (
     <div className={`space-y-6 ${className}`}>
       <div className="space-y-3">
@@ -84,11 +116,19 @@ export function MobileHeroHeader({ className = "" }: HeroHeaderProps) {
 
       {/* Simplified Action Buttons */}
       <div className="flex flex-col gap-3">
-        <Link href="/login">
-          <button className="btn-primary w-full">
-            Get Started
-          </button>
-        </Link>
+        {user ? (
+          <Link href="/dashboard">
+            <button className="btn-primary w-full">
+              Go to Dashboard
+            </button>
+          </Link>
+        ) : (
+          <Link href="/login">
+            <button className="btn-primary w-full">
+              Get Started
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
@@ -96,6 +136,16 @@ export function MobileHeroHeader({ className = "" }: HeroHeaderProps) {
 
 // Compact header for small spaces
 export function CompactHeroHeader({ className = "" }: HeroHeaderProps) {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, []);
+
   return (
     <div className={`space-y-4 ${className}`}>
       <h1 className="text-heading-md font-bold text-text-primary">
@@ -106,11 +156,19 @@ export function CompactHeroHeader({ className = "" }: HeroHeaderProps) {
         Real-time stability monitoring across 25 countries
       </p>
 
-      <Link href="/login">
-        <button className="btn-primary">
-          Get Started
-        </button>
-      </Link>
+      {user ? (
+        <Link href="/dashboard">
+          <button className="btn-primary">
+            Go to Dashboard
+          </button>
+        </Link>
+      ) : (
+        <Link href="/login">
+          <button className="btn-primary">
+            Get Started
+          </button>
+        </Link>
+      )}
     </div>
   );
 }

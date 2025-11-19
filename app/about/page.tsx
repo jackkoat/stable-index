@@ -10,7 +10,7 @@ export default function AboutPage() {
       <div className="min-h-screen stable-gradient">
         <Navigation />
         
-        <main className="pt-16">
+        <main className="pt-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Header */}
             <motion.div

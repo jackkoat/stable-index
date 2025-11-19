@@ -80,7 +80,7 @@ export default function HomePage() {
       <motion.section 
         variants={itemVariants} 
         id="overview"
-        className="py-12 px-8"
+        className="py-16 px-4"
       >
         <div className="max-w-[1600px] mx-auto">
           <HeroSection />
@@ -90,7 +90,7 @@ export default function HomePage() {
       {/* Stats Overview */}
       <motion.section 
         variants={itemVariants}
-        className="py-16 px-8"
+        className="py-16 px-4"
       >
         <div className="max-w-[1600px] mx-auto">
           {dashboardStats && <StatsOverview dashboardStats={dashboardStats} />}
@@ -100,7 +100,7 @@ export default function HomePage() {
       {/* Crypto Community Section - New Addition */}
       <motion.section 
         variants={itemVariants}
-        className="py-16 px-8"
+        className="py-16 px-4"
       >
         <div className="max-w-[1600px] mx-auto">
           <CryptoCommunitySection />
@@ -110,7 +110,7 @@ export default function HomePage() {
       {/* Risk Legend & Export */}
       <motion.section 
         variants={itemVariants} 
-        className="bg-surface-secondary py-20 px-8"
+        className="bg-surface-secondary py-20 px-4"
       >
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

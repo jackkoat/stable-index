@@ -49,12 +49,12 @@ export default function LoginPage() {
       <div className="min-h-screen stable-gradient">
         <Navigation />
         
-        <main className="flex items-center justify-center pt-16 px-4">
+        <main className="flex items-center justify-center pt-24 px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="w-full max-w-md"
+            className="w-full max-w-sm"
           >
             <div className="stable-card p-8">
               {/* Header */}
