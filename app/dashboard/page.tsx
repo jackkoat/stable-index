@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { WorldMap } from '@/components/WorldMap';
 import { Navigation } from '@/components/Navigation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { allCountriesData, dashboardStats as mockDashboardStats } from '@/data/mockData';

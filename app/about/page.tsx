@@ -140,7 +140,7 @@ export default function AboutPage() {
                   Contact Us
                 </h2>
                 <p className="text-gray-600 mb-6">
-                  Have questions or want to collaborate? We're ready to hear from you.
+                  Have questions or want to collaborate? We&apos;re ready to hear from you.
                 </p>
                 <div className="flex justify-center space-x-4">
                   <a 
