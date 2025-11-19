@@ -6,6 +6,7 @@
 // =====================================================
 
 import React, { lazy, Suspense } from 'react';
+import Link from 'next/link';
 import { smoothScrollTo } from '@/lib/utils';
 
 interface HeroHeaderProps {
@@ -38,23 +39,14 @@ export function HeroHeader({ className = "" }: HeroHeaderProps) {
       {/* Action Buttons */}
       <div className="flex flex-wrap gap-4">
         <Suspense fallback={<ButtonSkeleton />}>
-          <Button
-            onClick={() => smoothScrollTo('details')}
-            variant="primary"
-            icon="chart"
-          >
-            View Risk Analysis
-          </Button>
-        </Suspense>
-        
-        <Suspense fallback={<ButtonSkeleton />}>
-          <Button
-            onClick={() => smoothScrollTo('trends')}
-            variant="secondary"
-            icon="trending"
-          >
-            Historical Trends
-          </Button>
+          <Link href="/login">
+            <Button
+              variant="primary"
+              icon="log-in"
+            >
+              Get Started
+            </Button>
+          </Link>
         </Suspense>
       </div>
     </div>
@@ -92,18 +84,11 @@ export function MobileHeroHeader({ className = "" }: HeroHeaderProps) {
 
       {/* Simplified Action Buttons */}
       <div className="flex flex-col gap-3">
-        <button 
-          onClick={() => smoothScrollTo('details')}
-          className="btn-primary w-full"
-        >
-          View Analysis
-        </button>
-        <button 
-          onClick={() => smoothScrollTo('trends')}
-          className="btn-secondary w-full"
-        >
-          Trends
-        </button>
+        <Link href="/login">
+          <button className="btn-primary w-full">
+            Get Started
+          </button>
+        </Link>
       </div>
     </div>
   );
@@ -121,12 +106,11 @@ export function CompactHeroHeader({ className = "" }: HeroHeaderProps) {
         Real-time stability monitoring across 25 countries
       </p>
 
-      <button 
-        onClick={() => smoothScrollTo('details')}
-        className="btn-primary"
-      >
-        Explore Platform
-      </button>
+      <Link href="/login">
+        <button className="btn-primary">
+          Get Started
+        </button>
+      </Link>
     </div>
   );
 }
