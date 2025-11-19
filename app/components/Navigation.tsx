@@ -1,3 +1,5 @@
+'use client';
+
 // =====================================================
 // Simplified Navigation - Clean & Professional
 // =====================================================
@@ -6,7 +8,8 @@
 // =====================================================
 
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 interface NavigationProps {
@@ -17,7 +20,7 @@ interface NavigationProps {
 
 export const Navigation = ({ userName, userCountry, onLogout }: NavigationProps) => {
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,9 +32,9 @@ export const Navigation = ({ userName, userCountry, onLogout }: NavigationProps)
   }, []);
 
   const navItems = [
-    { label: 'Home', path: '/', active: location.pathname === '/' },
-    { label: 'Dashboard', path: '/dashboard', active: location.pathname === '/dashboard' },
-    { label: 'About', path: '/about', active: location.pathname === '/about' }
+    { label: 'Home', path: '/', active: pathname === '/' },
+    { label: 'Dashboard', path: '/dashboard', active: pathname === '/dashboard' },
+    { label: 'About', path: '/about', active: pathname === '/about' }
   ];
 
   return (
@@ -47,7 +50,7 @@ export const Navigation = ({ userName, userCountry, onLogout }: NavigationProps)
       <div className="max-w-[1600px] mx-auto px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo & Brand */}
-          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200">
             <motion.div 
               className="w-10 h-10 bg-accent-navy rounded-md flex items-center justify-center"
               whileHover={{ scale: 1.1, rotate: 10 }}
@@ -66,7 +69,7 @@ export const Navigation = ({ userName, userCountry, onLogout }: NavigationProps)
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
-              <Link key={item.path} to={item.path}>
+              <Link key={item.path} href={item.path}>
                 <motion.div
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}

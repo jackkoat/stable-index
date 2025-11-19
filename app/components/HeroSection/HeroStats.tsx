@@ -6,7 +6,7 @@
 // =====================================================
 
 import React from 'react';
-import { dashboardStats } from '../../data/mockData';
+import { dashboardStats } from '@/data/mockData';
 
 interface HeroStatsProps {
   className?: string;
