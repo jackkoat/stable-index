@@ -6,7 +6,7 @@
 // =====================================================
 
 import React from 'react';
-import { CountryData, RiskLevel } from '../../types';
+import { CountryData, RiskLevel } from '../../../types';
 import { getRiskColor } from './ColorScheme';
 
 interface MapStatisticsProps {

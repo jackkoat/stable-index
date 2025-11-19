@@ -9,7 +9,7 @@
 export { 
   WorldMap,
   LazyWorldMap
-} from './WorldMap';
+} from './WorldMap/';
 
 export { 
   BackgroundMap,

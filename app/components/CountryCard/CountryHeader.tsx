@@ -6,8 +6,8 @@
 // =====================================================
 
 import React from 'react';
-import { CountryData } from '../../types';
-import { getTrendIcon, getTrendColor, formatNumber } from '../../lib/utils';
+import { CountryData } from '../../../types';
+import { getTrendIcon, getTrendColor, formatNumber } from '@/lib/utils';
 
 interface CountryHeaderProps {
   country: CountryData['country'];

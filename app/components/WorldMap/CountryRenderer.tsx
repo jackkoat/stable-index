@@ -6,7 +6,7 @@
 // =====================================================
 
 import React from 'react';
-import { CountryData } from '../../types';
+import { CountryData } from '../../../types';
 import { CountryPosition } from './CountryCoordinates';
 import { getRiskColor, getRiskHoverColor, getSelectedRiskColor } from './ColorScheme';
 

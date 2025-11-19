@@ -5,7 +5,7 @@
 // =====================================================
 
 import React from 'react';
-import { CountryData } from '../../types';
+import { CountryData } from '../../../types';
 import { LoadingSpinner } from '../shared/LoadingSpinner';
 
 interface SimpleHistoricalChartProps {

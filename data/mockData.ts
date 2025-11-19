@@ -23,7 +23,7 @@ export const regions = optimizedRegions;
 
 // Legacy helper functions dengan optimized implementation
 export const getCountriesByRegion = (region: string) => {
-  const countryCodes = optimizedRegions[region] || [];
+  const countryCodes = (optimizedRegions as Record<string, readonly string[]>)[region] || [];
   return getAllCountriesData().filter(c => countryCodes.includes(c.country.code));
 };
 

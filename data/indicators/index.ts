@@ -161,7 +161,7 @@ export const calculateCompositeScore = (
   let totalWeight = 0;
 
   Object.entries(indicatorValues).forEach(([code, value]) => {
-    const weight = weightsToUse[code] || 0;
+    const weight = (weightsToUse as Record<string, number>)[code] || 0;
     if (weight > 0) {
       totalScore += value * weight;
       totalWeight += weight;

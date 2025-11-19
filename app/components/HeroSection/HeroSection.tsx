@@ -12,11 +12,23 @@ import { dashboardStats } from '@/data/mockData';
 const HeroHeader = lazy(() => import('./HeroHeader').then(module => ({ 
   default: module.HeroHeader 
 })));
+const MobileHeroHeader = lazy(() => import('./HeroHeader').then(module => ({ 
+  default: module.MobileHeroHeader 
+})));
+const CompactHeroHeader = lazy(() => import('./HeroHeader').then(module => ({ 
+  default: module.CompactHeroHeader 
+})));
 const HeroStats = lazy(() => import('./HeroStats').then(module => ({ 
   default: module.HeroStats 
 })));
 const HeroVideo = lazy(() => import('./HeroVideo').then(module => ({ 
   default: module.HeroVideo 
+})));
+const LightVideoPreview = lazy(() => import('./HeroVideo').then(module => ({ 
+  default: module.LightVideoPreview 
+})));
+const StaticVideoPreview = lazy(() => import('./HeroVideo').then(module => ({ 
+  default: module.StaticVideoPreview 
 })));
 const RiskDistributionStats = lazy(() => import('./HeroStats').then(module => ({ 
   default: module.RiskDistributionStats 
@@ -146,11 +158,11 @@ export function MobileHeroSection() {
   return (
     <div className="space-y-8">
       <Suspense fallback={<HeroHeaderSkeleton />}>
-        <HeroHeader.MobileHeroHeader />
+        <MobileHeroHeader />
       </Suspense>
 
       <Suspense fallback={<VideoSkeleton />}>
-        <HeroVideo.LightVideoPreview />
+        <LightVideoPreview />
       </Suspense>
 
       <Suspense fallback={<StatsSkeleton />}>
@@ -165,12 +177,12 @@ export function CompactHeroSection() {
   return (
     <div className="space-y-6">
       <Suspense fallback={<HeroHeaderSkeleton />}>
-        <HeroHeader.CompactHeroHeader />
+        <CompactHeroHeader />
       </Suspense>
 
       <div className="flex justify-center">
         <Suspense fallback={<VideoSkeleton />}>
-          <HeroVideo.StaticVideoPreview />
+          <StaticVideoPreview />
         </Suspense>
       </div>
 

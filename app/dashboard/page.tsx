@@ -6,9 +6,17 @@ import { WorldMap } from '@/components/WorldMap';
 import { Navigation } from '@/components/Navigation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
+interface DashboardStats {
+  totalCountries: number;
+  avgStabilityScore: number;
+  highRiskCountries: number;
+  lowRiskCountries: number;
+  lastUpdated: string;
+}
+
 export default function DashboardPage() {
   const [countriesData, setCountriesData] = useState([]);
-  const [dashboardStats, setDashboardStats] = useState(null);
+  const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
   const [comparisonMode, setComparisonMode] = useState(false);
@@ -99,8 +107,6 @@ export default function DashboardPage() {
                 countries={countriesData}
                 onCountrySelect={handleCountrySelect}
                 selectedCountry={selectedCountry}
-                comparisonMode={comparisonMode}
-                loading={dataLoading}
               />
             </motion.div>
 

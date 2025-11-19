@@ -5,15 +5,9 @@
 // =====================================================
 
 // Countries - optimized with caching
-export {
-  getAllCountryCodes,
-  getCountryByCode,
-  getCountriesByRegion,
-  getCountriesByRiskLevel,
-  getAllCountriesData,
-  mockCountriesData,
-  regions,
-} from './countries';
+import { getAllCountriesData, mockCountriesData, getCountriesByRegion, getCountriesByRiskLevel, regions } from './countries';
+export { getAllCountryCodes, getCountryByCode } from './countries';
+export { getAllCountriesData, mockCountriesData, getCountriesByRegion, getCountriesByRiskLevel, regions };
 
 // Indicators - enhanced metadata
 export {
@@ -27,6 +21,7 @@ export {
 } from './indicators';
 
 // Historical - efficient data management
+import { mockHistoricalData, getHistoricalData } from './historical';
 export {
   getHistoricalData,
   getHistoricalDataByDateRange,
@@ -37,6 +32,7 @@ export {
 } from './historical';
 
 // Statistics - dashboard optimized
+import { dashboardStats, getDashboardStats } from './statistics';
 export {
   getDashboardStats,
   calculateBasicStats,
@@ -49,12 +45,7 @@ export {
 } from './statistics';
 
 // Utilities - performance optimized
-export {
-  normalizationUtils,
-  calculateURIScore,
-  getRiskLevel,
-  normalizationRanges,
-} from './utils/normalization';
+import { normalizationUtils } from './utils/normalization';
 
 export {
   dataCache,
@@ -62,26 +53,18 @@ export {
   withCache,
   memoizeWithTTL,
 } from './utils/cache';
+import { dataCache } from './utils/cache';
 
 export {
   MemoizedCountryCard,
   MemoizedHistoricalChart,
   MemoizedStatsOverview,
   useMemoizedSorting,
-  useMemoizedFiltering,
+  // useMemoizedFiltering,
 } from './utils/memoization';
 
 // Hooks - efficient data fetching
-export {
-  useCountries,
-  useCountry,
-  useCountriesByRisk,
-  useHistoricalData,
-  useDashboardStats,
-  useCountriesWithFilters,
-  DataErrorBoundary,
-  LoadingSkeleton,
-} from './hooks/useDataHooks';
+import { useCountries, useHistoricalData, useDashboardStats } from './hooks/useDataHooks';
 
 // Advanced patterns
 export {
@@ -125,7 +108,7 @@ export const PERFORMANCE_CONFIG = {
 export default {
   // Core functions
   getAllCountriesData,
-  getCountriesByRegion,
+  // getCountriesByRegion, // in legacyMockData
   getHistoricalData,
   getDashboardStats,
   

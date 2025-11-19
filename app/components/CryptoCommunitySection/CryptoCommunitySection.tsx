@@ -1,12 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
-import { shared } from '../shared';
+import { LoadingSpinner } from '../shared';
 
 const SectionHeader = lazy(() => import('./SectionHeader').then(module => ({ default: module.SectionHeader })));
 const BenefitsList = lazy(() => import('./BenefitsList').then(module => ({ default: module.BenefitsList })));
 const CallToAction = lazy(() => import('./CallToAction').then(module => ({ default: module.CallToAction })));
-
-const { LoadingSpinner } = shared;
 
 interface CryptoCommunitySectionProps {
   className?: string;

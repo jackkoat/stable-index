@@ -6,9 +6,9 @@
 // =====================================================
 
 import React from 'react';
-import { CountryData } from '../../types';
-import { RiskBadge } from '../ui/RiskBadge';
-import { formatNumber } from '../../lib/utils';
+import { CountryData } from '../../../types';
+import { RiskBadge } from '../RiskBadge';
+import { formatNumber } from '@/lib/utils';
 
 interface ScoreDisplayProps {
   score: CountryData['current_uri']['uri_score'];
@@ -55,7 +55,7 @@ export function ScoreDisplay({
       </div>
       {showBadge && (
         <div className={`${currentSize.badge} ${animated ? 'animate-fade-in-up' : ''}`} style={{ animationDelay: '0.2s' }}>
-          <RiskBadge level={riskLevel} size={size === 'small' ? 'small' : 'regular'} />
+          <RiskBadge level={riskLevel} size={size === 'large' ? 'large' : 'regular'} />
         </div>
       )}
     </div>
@@ -73,7 +73,7 @@ export function CompactScoreDisplay({
       <div className="text-heading-sm font-bold text-accent-navy">
         {formatNumber(score)}
       </div>
-      <RiskBadge level={riskLevel} size="small" />
+      <RiskBadge level={riskLevel} size="regular" />
     </div>
   );
 }

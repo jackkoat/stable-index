@@ -5,8 +5,8 @@
 // =====================================================
 
 import React, { useState, useMemo } from 'react';
-import { CountryData } from '../../types';
-import { LoadingSpinner, ChartLoader } from '../shared/LoadingSpinner';
+import { CountryData } from '@/types/index';
+import { LoadingSpinner, ChartLoader } from '../shared';
 
 interface HistoricalChartProps {
   data?: CountryData[];
@@ -118,7 +118,7 @@ function ResponsiveChart({
 }: ChartRendererProps) {
   const padding = 40;
   const chartHeight = height - padding * 2;
-  const chartWidth = '100%';
+  const chartWidth = 100;
   
   const minScore = Math.min(...data.map(d => d.score));
   const maxScore = Math.max(...data.map(d => d.score));

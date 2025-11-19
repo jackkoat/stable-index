@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { HistoricalData } from '../types';
-import { dataService } from '../lib/supabase';
+import { HistoricalData } from '../../types';
+import { dataService } from '../../lib/supabase';
 
 interface SimpleHistoricalChartProps {
   data?: HistoricalData[];

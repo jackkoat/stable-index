@@ -5,7 +5,7 @@
 // Display detailed metrics for selected countries
 // =====================================================
 
-import { CountryData } from '../types';
+import { CountryData } from '../../types';
 import { RiskBadge } from './RiskBadge';
 
 interface ComparisonModeProps {
@@ -196,7 +196,7 @@ export default function ComparisonMode({
         {/* Footer Actions */}
         <div className="px-8 py-6 border-t border-neutral-200 bg-neutral-50 flex items-center justify-between">
           <p className="text-body text-neutral-600">
-            Tip: Click "Remove" on a country to exclude it from comparison
+            Tip: Click &quot;Remove&quot; on a country to exclude it from comparison
           </p>
           <button
             onClick={onClose}

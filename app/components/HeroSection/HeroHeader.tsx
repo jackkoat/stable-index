@@ -6,15 +6,15 @@
 // =====================================================
 
 import React, { lazy, Suspense } from 'react';
-import { smoothScrollTo } from '../../lib/utils';
+import { smoothScrollTo } from '@/lib/utils';
 
 interface HeroHeaderProps {
   className?: string;
 }
 
 // Lazy load heavy components
-const Button = lazy(() => import('../ui/Button').then(module => ({ default: module.Button })));
-const VideoPreview = lazy(() => import('./HeroVideo'));
+const Button = lazy(() => import('../shared/Button').then(module => ({ default: module.Button })));
+const VideoPreview = lazy(() => import('./HeroVideo').then(module => ({ default: module.HeroVideo })));
 
 export function HeroHeader({ className = "" }: HeroHeaderProps) {
   return (

@@ -18,11 +18,11 @@ import { getDashboardStats } from '../statistics';
 import { dataCache, CACHE_KEYS } from '../utils/cache';
 
 // Generic data hook dengan loading states
-const useDataState = <T>(
+function useDataState<T>(
   dataFn: () => T,
   dependencies: any[] = [],
   cacheKey?: string
-) => {
+) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

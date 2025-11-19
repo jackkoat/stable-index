@@ -11,4 +11,4 @@ export {
   LightBackgroundMap,
   MinimalBackgroundMap,
   LazyBackgroundMap
-} from './BackgroundMap';
+} from './BackgroundMap/';

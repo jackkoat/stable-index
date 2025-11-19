@@ -5,7 +5,7 @@
 // Split from WorldMap for better code splitting
 // =====================================================
 
-import { RiskLevel } from '../../types';
+import { RiskLevel } from '../../../types';
 
 // Risk level colors
 export const getRiskColor = (riskLevel: RiskLevel): string => {

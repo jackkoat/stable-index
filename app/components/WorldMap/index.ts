@@ -8,8 +8,7 @@
 export { WorldMap } from './WorldMap';
 
 // Sub-components for flexible imports
-export { CountryCoordinates } from './CountryCoordinates';
-export { ColorScheme } from './ColorScheme';
+export { countryCoordinates as CountryCoordinates } from './CountryCoordinates';
 export { CountryRenderer } from './CountryRenderer';
 export { MapTooltip, TooltipContent } from './MapTooltip';
 export { MapLegend, InteractiveLegend, CompactLegend } from './MapLegend';

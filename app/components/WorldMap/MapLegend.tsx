@@ -6,7 +6,7 @@
 // =====================================================
 
 import React from 'react';
-import { RiskLevel } from '../../types';
+import { RiskLevel } from '../../../types';
 import { getRiskColor } from './ColorScheme';
 
 interface MapLegendProps {

@@ -28,7 +28,7 @@ interface BenefitCardProps {
       opacity: number;
       transition: {
         duration: number;
-        ease: string;
+        ease: any;
       };
     };
   };

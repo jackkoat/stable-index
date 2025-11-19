@@ -6,7 +6,7 @@
 // =====================================================
 
 import { useState, useMemo } from 'react';
-import { CountryData } from '../../types';
+import { CountryData } from '../../../types';
 
 // Import split components
 import { countryCoordinates, getAvailableCountries } from './CountryCoordinates';

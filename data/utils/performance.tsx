@@ -5,8 +5,15 @@
 // untuk data layer optimization
 // =====================================================
 
-import React, { Component, ErrorInfo, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Component, ErrorInfo, ReactNode, useEffect, useRef, useState, ComponentType } from 'react';
 import { dataCache } from '../utils/cache';
+
+// Declare browser memory API
+interface MemoryInfo {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
 
 interface PerformanceMetrics {
   renderTime: number;

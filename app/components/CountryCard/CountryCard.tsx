@@ -6,7 +6,7 @@
 // =====================================================
 
 import React, { Suspense, lazy } from 'react';
-import { CountryData } from '../../types';
+import { CountryData } from '../../../types';
 
 // Lazy load heavy components
 const CountryHeader = lazy(() => import('./CountryHeader').then(module => ({ 
@@ -19,8 +19,28 @@ const IndicatorsList = lazy(() => import('./IndicatorsList').then(module => ({
   default: module.IndicatorsList 
 })));
 
+// Additional lazy components
+const CompactCountryHeader = lazy(() => import('./CountryHeader').then(module => ({ 
+  default: module.CompactCountryHeader 
+})));
+const MinimalCountryHeader = lazy(() => import('./CountryHeader').then(module => ({ 
+  default: module.MinimalCountryHeader 
+})));
+const SelectedCountryHeader = lazy(() => import('./CountryHeader').then(module => ({ 
+  default: module.SelectedCountryHeader 
+})));
+const CompactScoreDisplay = lazy(() => import('./ScoreDisplay').then(module => ({ 
+  default: module.CompactScoreDisplay 
+})));
+const LargeScoreDisplay = lazy(() => import('./ScoreDisplay').then(module => ({ 
+  default: module.LargeScoreDisplay 
+})));
+const HorizontalIndicatorsList = lazy(() => import('./IndicatorsList').then(module => ({ 
+  default: module.HorizontalIndicatorsList 
+})));
+
 // Import components directly (lighter)
-import { getTimeAgo } from '../../lib/utils';
+import { getTimeAgo } from '@/lib/utils';
 
 interface CountryCardProps {
   data: CountryData;
@@ -128,7 +148,7 @@ function CompactCountryCard({ data, onClick, isSelected = false, className = "" 
       `}
     >
       <Suspense fallback={<CompactHeaderSkeleton />}>
-        <CountryHeader.CompactCountryHeader
+        <CompactCountryHeader
           country={country}
           trend={trend}
           trend_value={trend_value}
@@ -138,7 +158,7 @@ function CompactCountryCard({ data, onClick, isSelected = false, className = "" 
       </Suspense>
 
       <Suspense fallback={<CompactScoreSkeleton />}>
-        <ScoreDisplay.CompactScoreDisplay
+        <CompactScoreDisplay
           score={current_uri.uri_score}
           riskLevel={current_uri.risk_level}
         />
@@ -162,7 +182,7 @@ function MinimalCountryCard({ data, onClick, className = "" }: CountryCardProps)
       `}
     >
       <Suspense fallback={<MinimalHeaderSkeleton />}>
-        <CountryHeader.MinimalCountryHeader
+        <MinimalCountryHeader
           country={country}
           onClick={onClick}
           clickable={!!onClick}
@@ -170,7 +190,7 @@ function MinimalCountryCard({ data, onClick, className = "" }: CountryCardProps)
       </Suspense>
 
       <Suspense fallback={<MinimalScoreSkeleton />}>
-        <ScoreDisplay.CompactScoreDisplay
+        <CompactScoreDisplay
           score={current_uri.uri_score}
           riskLevel={current_uri.risk_level}
         />
@@ -195,7 +215,7 @@ function DetailedCountryCard({ data, onClick, isSelected = false, className = ""
       `}
     >
       <Suspense fallback={<DetailedHeaderSkeleton />}>
-        <CountryHeader.SelectedCountryHeader
+        <SelectedCountryHeader
           country={country}
           trend={trend}
           trend_value={trend_value}
@@ -205,14 +225,14 @@ function DetailedCountryCard({ data, onClick, isSelected = false, className = ""
       </Suspense>
 
       <Suspense fallback={<LargeScoreSkeleton />}>
-        <ScoreDisplay.LargeScoreDisplay
+        <LargeScoreDisplay
           score={current_uri.uri_score}
           riskLevel={current_uri.risk_level}
         />
       </Suspense>
 
       <Suspense fallback={<DetailedIndicatorsSkeleton />}>
-        <IndicatorsList.HorizontalIndicatorsList indicators={indicators} />
+        <HorizontalIndicatorsList indicators={indicators} />
       </Suspense>
     </div>
   );

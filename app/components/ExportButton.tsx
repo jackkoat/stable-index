@@ -5,7 +5,7 @@
 // Supports filtered data export
 // =====================================================
 
-import { CountryData } from '../types';
+import { CountryData } from '../../types';
 
 interface ExportButtonProps {
   data: CountryData[];

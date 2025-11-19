@@ -4,7 +4,7 @@
 // Professional risk classification filters (no emojis)
 // =====================================================
 
-import { RiskLevel } from '../types';
+import { RiskLevel } from '../../types';
 
 interface RiskLevelFilterProps {
   selectedRiskLevels: RiskLevel[];

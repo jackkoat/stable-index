@@ -6,7 +6,7 @@
 // =====================================================
 
 import { useState, useRef, useEffect } from 'react';
-import { CountryData, RiskLevel } from '../types';
+import { CountryData, RiskLevel } from '../../types';
 
 interface CountrySelectorProps {
   countries: CountryData[];

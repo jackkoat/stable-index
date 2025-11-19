@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import { useEffect, useRef, useState } from 'react';
-import { HistoricalData } from '../types';
-import { dataService } from '../lib/supabase';
+import { HistoricalData } from '../../types/index';
+import { dataService } from '../../lib/supabase';
 
 interface HistoricalChartProps {
   data?: HistoricalData[];

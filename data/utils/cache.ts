@@ -122,7 +122,7 @@ export const memoizeWithTTL = <T extends (...args: any[]) => any>(
 // Clear expired entries periodically
 setInterval(() => {
   const now = Date.now();
-  for (const [key, entry] of dataCache['cache'].entries()) {
+  for (const [key, entry] of Array.from(dataCache['cache'].entries())) {
     if (now - entry.timestamp > entry.ttl) {
       dataCache.delete(key);
     }

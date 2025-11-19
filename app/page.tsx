@@ -9,8 +9,17 @@ import ExportButton from '@/components/ExportButton';
 import { useState, useEffect } from 'react';
 
 // This is a client component for the home page
+interface DashboardStats {
+  total_countries: number;
+  low_risk: number;
+  moderate_risk: number;
+  high_risk: number;
+  critical_risk: number;
+  avg_uri_score: number;
+}
+
 export default function HomePage() {
-  const [dashboardStats, setDashboardStats] = useState(null);
+  const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null);
   const [countriesData, setCountriesData] = useState([]);
   const [dataLoading, setDataLoading] = useState(true);
 
@@ -20,10 +29,12 @@ export default function HomePage() {
       try {
         // TODO: Replace with actual data loading from Supabase
         setDashboardStats({
-          totalCountries: 195,
-          avgStabilityScore: 72.5,
-          highRiskCountries: 23,
-          lowRiskCountries: 89
+          total_countries: 195,
+          low_risk: 89,
+          moderate_risk: 83,
+          high_risk: 23,
+          critical_risk: 0,
+          avg_uri_score: 72.5
         });
         
         setCountriesData([]);
@@ -72,7 +83,7 @@ export default function HomePage() {
 
       {/* Stats Overview */}
       <motion.section variants={itemVariants}>
-        <StatsOverview dashboardStats={dashboardStats} />
+        {dashboardStats && <StatsOverview dashboardStats={dashboardStats} />}
       </motion.section>
 
       {/* Crypto Community Section - New Addition */}

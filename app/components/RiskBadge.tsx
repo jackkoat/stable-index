@@ -5,8 +5,8 @@
 // Light Theme with Enhanced Visual Hierarchy
 // =====================================================
 
-import { RiskLevel } from '../types';
-import { getRiskLevelColor, getRiskLevelIcon } from '../lib/utils';
+import { RiskLevel } from '../../types';
+import { getRiskLevelColor, getRiskLevelIcon } from '../../lib/utils';
 
 interface RiskBadgeProps {
   level: RiskLevel;

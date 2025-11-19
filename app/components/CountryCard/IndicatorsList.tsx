@@ -6,8 +6,8 @@
 // =====================================================
 
 import React from 'react';
-import { CountryData } from '../../types';
-import { formatNumber } from '../../lib/utils';
+import { CountryData } from '../../../types';
+import { formatNumber } from '@/lib/utils';
 
 interface IndicatorsListProps {
   indicators: CountryData['indicators'];
@@ -80,7 +80,7 @@ interface IndicatorItemProps {
     key: string;
     label: string;
     value: number;
-    format: 'percentage' | 'number' | 'score';
+    format: string;
     icon: string;
   };
   showIcon: boolean;

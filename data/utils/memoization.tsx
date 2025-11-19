@@ -194,19 +194,19 @@ export const usePerformanceMonitor = (componentName: string) => {
 };
 
 // Optimized data transformations
-export const useMemoizedTransformations = <T, R>(
+export function useMemoizedTransformations<T, R>(
   data: T[],
   transformFn: (data: T[]) => R,
   dependencies: any[] = []
-) => {
+) {
   return useMemo(() => transformFn(data), [data, ...dependencies]);
-};
+}
 
-export const useMemoizedSorting = <T>(
+export function useMemoizedSorting<T>(
   data: T[],
   sortFn: (a: T, b: T) => number,
   stableSort: boolean = true
-) => {
+) {
   return useMemo(() => {
     if (stableSort) {
       return [...data].map((item, index) => ({ item, index }))
@@ -220,18 +220,18 @@ export const useMemoizedSorting = <T>(
   }, [data, sortFn, stableSort]);
 };
 
-export const useMemoizedFiltering = <T>(
+export function useMemoizedFiltering<T>(
   data: T[],
   filterFn: (item: T) => boolean
-) => {
+) {
   return useMemo(() => data.filter(filterFn), [data, filterFn]);
-};
+}
 
 // Debounced callbacks untuk expensive operations
-export const useDebouncedCallback = <T extends (...args: any[]) => any>(
+export function useDebouncedCallback<T extends (...args: any[]) => any>(
   callback: T,
   delay: number
-) => {
+) {
   const timeoutRef = React.useRef<NodeJS.Timeout>();
   
   return useCallback((...args: Parameters<T>) => {
@@ -243,15 +243,15 @@ export const useDebouncedCallback = <T extends (...args: any[]) => any>(
       callback(...args);
     }, delay);
   }, [callback, delay]);
-};
+}
 
 // Virtual scrolling helpers
-export const useVirtualScroll = <T>(
+export function useVirtualScroll<T>(
   items: T[],
   itemHeight: number,
   containerHeight: number,
   overscan: number = 5
-) => {
+) {
   const [scrollTop, setScrollTop] = React.useState(0);
   
   const visibleItems = useMemo(() => {
@@ -281,7 +281,7 @@ export const useVirtualScroll = <T>(
     handleScroll,
     setScrollTop,
   };
-};
+}
 
 export default {
   MemoizedCountryCard,

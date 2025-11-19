@@ -1,4 +1,5 @@
 // Main component with lazy loading support
+import React from 'react';
 export { CryptoCommunitySection } from './CryptoCommunitySection';
 
 // Sub-components for granular lazy loading
