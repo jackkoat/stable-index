@@ -55,10 +55,10 @@ export default function DashboardPage() {
                 Risk Intelligence Dashboard
               </div>
               <h1 className="text-heading-2xl font-bold text-text-primary mb-6 leading-tight">
-                Dashboard Analisis Risiko Global
+                Global Risk Analysis Dashboard
               </h1>
               <p className="text-body-lg text-text-secondary max-w-4xl leading-relaxed">
-                Pantau dan analisis tingkat stabilitas negara secara real-time dengan data komprehensif dan visualisasi interaktif yang professional.
+                Monitor and analyze country stability levels in real-time with comprehensive data and professional interactive visualizations.
               </p>
             </motion.div>
 
@@ -112,7 +112,7 @@ export default function DashboardPage() {
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Total Negara</p>
+                      <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Total Countries</p>
                       <p className="text-heading-lg font-bold text-text-primary">
                         {dashboardStats.total_countries}
                       </p>
@@ -128,7 +128,7 @@ export default function DashboardPage() {
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Skor Stabilitas Rata-rata</p>
+                      <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Average Stability Score</p>
                       <p className="text-heading-lg font-bold text-risk-low-base">
                         {dashboardStats.avg_uri_score}
                       </p>
@@ -144,7 +144,7 @@ export default function DashboardPage() {
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Negara Risiko Tinggi</p>
+                      <p className="text-caption text-text-muted uppercase tracking-wider mb-1">High Risk Countries</p>
                       <p className="text-heading-lg font-bold text-risk-critical-base">
                         {dashboardStats.high_risk}
                       </p>
@@ -160,7 +160,7 @@ export default function DashboardPage() {
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Negara Risiko Rendah</p>
+                      <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Low Risk Countries</p>
                       <p className="text-heading-lg font-bold text-risk-moderate-base">
                         {dashboardStats.low_risk}
                       </p>
@@ -169,6 +169,19 @@ export default function DashboardPage() {
                 </div>
               </motion.div>
             )}
+
+            {/* Static World Map Placeholder */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mb-12"
+            >
+              <div className="data-card w-2/4 mx-auto">
+                <h2 className="text-heading-lg font-semibold text-text-primary mb-6">World Map Overview</h2>
+                <img src="/world-map.jpg" alt="World Map" className="w-full h-auto rounded-lg" />
+              </div>
+            </motion.div>
           </div>
         </main>
       </div>
