@@ -9,7 +9,7 @@ import { CountryData } from '@/types/index';
 export default function DataPage() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gradient-to-br from-surface-secondary via-white to-surface-tertiary">
+      <div className="min-h-screen">
         <Navigation />
 
         <main className="pt-20">

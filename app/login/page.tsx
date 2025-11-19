@@ -46,7 +46,7 @@ export default function LoginPage() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen stable-gradient">
+      <div className="min-h-screen">
         <Navigation />
         
         <main className="flex items-center justify-center pt-24 px-4">
@@ -65,10 +65,10 @@ export default function LoginPage() {
                   </svg>
                 </div>
                 <h1 className="text-2xl font-bold text-stable-navy-800 mb-2">
-                  Masuk ke Stable Index
+                  Login to Stable Index
                 </h1>
                 <p className="text-gray-600">
-                  Akses dashboard analisis risiko global
+                  Access the global risk analysis dashboard
                 </p>
               </div>
 
@@ -86,7 +86,7 @@ export default function LoginPage() {
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                       </svg>
-                      Demo Login (tanpa akun)
+                      Demo Login (no account required)
                     </>
                   )}
                 </button>
@@ -97,7 +97,7 @@ export default function LoginPage() {
                   <div className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">atau masuk dengan email</span>
+                  <span className="px-2 bg-white text-gray-500">or login with email</span>
                 </div>
               </div>
 
@@ -114,13 +114,13 @@ export default function LoginPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-stable-navy-500 focus:border-transparent"
-                    placeholder="nama@email.com"
+                    placeholder="name@email.com"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                    Kata Sandi
+                    Password
                   </label>
                   <input
                     id="password"
@@ -151,7 +151,7 @@ export default function LoginPage() {
                   {isLoading ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   ) : (
-                    'Masuk'
+                    'Login'
                   )}
                 </button>
               </form>
@@ -159,14 +159,14 @@ export default function LoginPage() {
               {/* Footer Links */}
               <div className="mt-6 text-center text-sm text-gray-600">
                 <p>
-                  Belum punya akun?{' '}
+                  Don't have an account?{' '}
                   <a href="#" className="text-stable-navy-600 hover:text-stable-navy-800 font-medium">
-                    Daftar gratis
+                    Sign up for free
                   </a>
                 </p>
                 <p className="mt-2">
                   <a href="#" className="text-stable-navy-600 hover:text-stable-navy-800">
-                    Lupa kata sandi?
+                    Forgot password?
                   </a>
                 </p>
               </div>
@@ -180,13 +180,13 @@ export default function LoginPage() {
               className="text-center mt-8"
             >
               <p className="text-gray-600 text-sm">
-                Dengan masuk, Anda menyetujui{' '}
+                By logging in, you agree to our{' '}
                 <a href="#" className="text-stable-navy-600 hover:text-stable-navy-800">
-                  Syarat & Ketentuan
+                  Terms & Conditions
                 </a>{' '}
-                dan{' '}
+                and{' '}
                 <a href="#" className="text-stable-navy-600 hover:text-stable-navy-800">
-                  Kebijakan Privasi
+                  Privacy Policy
                 </a>
               </p>
             </motion.div>

@@ -7,7 +7,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 export default function AboutPage() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen stable-gradient">
+      <div className="min-h-screen">
         <Navigation />
         
         <main className="pt-24">
@@ -20,10 +20,10 @@ export default function AboutPage() {
               className="text-center mb-12"
             >
               <h1 className="text-4xl font-bold text-stable-navy-800 mb-4">
-                Tentang Stable Index
+                About Stable Index
               </h1>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Platform penilaian risiko global yang menyediakan analisis real-time untuk stabilitas negara dengan data komprehensif dan visualisasi interaktif.
+                A global risk assessment platform providing real-time analysis for country stability with comprehensive data and interactive visualizations.
               </p>
             </motion.div>
 
@@ -42,10 +42,10 @@ export default function AboutPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-semibold text-stable-navy-800">Misi Kami</h2>
+                  <h2 className="text-2xl font-semibold text-stable-navy-800">Our Mission</h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Menyediakan penilaian risiko negara yang akurat dan real-time untuk membantu pengambilan keputusan yang lebih baik dalam dunia yang terus berubah. Kami percaya bahwa informasi yang transparan dan mudah dipahami adalah kunci untuk menciptakan dunia yang lebih stabil.
+                  To provide accurate and real-time country risk assessments to help make better decisions in an ever-changing world. We believe that transparent and easily understandable information is key to creating a more stable world.
                 </p>
               </motion.div>
 
@@ -63,10 +63,10 @@ export default function AboutPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-semibold text-stable-navy-800">Visi Kami</h2>
+                  <h2 className="text-2xl font-semibold text-stable-navy-800">Our Vision</h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Menjadi platform terdepan dalam penilaian risiko global yang dipercaya oleh pemerintah, organisasi internasional, dan individu untuk membuat keputusan strategis yang berdampak positif bagi stabilitas dunia.
+                  To become the leading global risk assessment platform trusted by governments, international organizations, and individuals to make strategic decisions that positively impact world stability.
                 </p>
               </motion.div>
             </div>
@@ -79,7 +79,7 @@ export default function AboutPage() {
               className="mt-12"
             >
               <h2 className="text-3xl font-bold text-stable-navy-800 mb-8 text-center">
-                Fitur Utama Platform
+                Main Platform Features
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -90,10 +90,10 @@ export default function AboutPage() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-stable-navy-800 mb-2">
-                    Analisis Data Real-time
+                    Real-time Data Analysis
                   </h3>
                   <p className="text-gray-600 text-sm">
-                    Monitor perubahan stabilitas negara secara langsung dengan pembaruan data yang berkelanjutan.
+                    Monitor country stability changes directly with continuous data updates.
                   </p>
                 </div>
 
@@ -104,10 +104,10 @@ export default function AboutPage() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-stable-navy-800 mb-2">
-                    Visualisasi Interaktif
+                    Interactive Visualization
                   </h3>
                   <p className="text-gray-600 text-sm">
-                    Jelajahi data melalui peta dunia interaktif dan grafik yang mudah dipahami.
+                    Explore data through interactive world maps and easy-to-understand charts.
                   </p>
                 </div>
 
@@ -119,10 +119,10 @@ export default function AboutPage() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-stable-navy-800 mb-2">
-                    Prediksi dan Analisis
+                    Predictions and Analysis
                   </h3>
                   <p className="text-gray-600 text-sm">
-                    Dapatkan insight mendalam dan prediksi berdasarkan pola data historis dan tren global.
+                    Get deep insights and predictions based on historical data patterns and global trends.
                   </p>
                 </div>
               </div>
@@ -137,23 +137,23 @@ export default function AboutPage() {
             >
               <div className="stable-card p-8">
                 <h2 className="text-2xl font-semibold text-stable-navy-800 mb-4">
-                  Hubungi Kami
+                  Contact Us
                 </h2>
                 <p className="text-gray-600 mb-6">
-                  Punya pertanyaan atau ingin berkolaborasi? Kami siap mendengar dari Anda.
+                  Have questions or want to collaborate? We're ready to hear from you.
                 </p>
                 <div className="flex justify-center space-x-4">
                   <a 
                     href="mailto:contact@stableindex.com" 
                     className="stable-button-primary"
                   >
-                    Kirim Email
+                    Send Email
                   </a>
                   <a 
                     href="#" 
                     className="stable-button-secondary"
                   >
-                    Lihat Dokumentasi
+                    View Documentation
                   </a>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import { InteractiveBackground } from "./components/BackgroundMap/InteractiveBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,7 +61,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-slate-100">
+          <InteractiveBackground/>
+          <div className="min-h-screen">
             {children}
           </div>
         </ThemeProvider>

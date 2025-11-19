@@ -38,7 +38,7 @@ export default function DashboardPage() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gradient-to-br from-surface-secondary via-white to-surface-tertiary">
+      <div className="min-h-screen">
         <Navigation />
         
         <main className="pt-20">
