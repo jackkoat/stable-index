@@ -5,45 +5,25 @@ import { useState, useEffect } from 'react';
 import { WorldMap } from '@/components/WorldMap';
 import { Navigation } from '@/components/Navigation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { allCountriesData, dashboardStats as mockDashboardStats } from '@/data/mockData';
+import { CountryData } from '@/types/index';
 
 interface DashboardStats {
-  totalCountries: number;
-  avgStabilityScore: number;
-  highRiskCountries: number;
-  lowRiskCountries: number;
-  lastUpdated: string;
+  total_countries: number;
+  low_risk: number;
+  moderate_risk: number;
+  high_risk: number;
+  critical_risk: number;
+  avg_uri_score: number;
 }
 
 export default function DashboardPage() {
-  const [countriesData, setCountriesData] = useState([]);
-  const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null);
+  console.log('DashboardPage render, allCountriesData type:', typeof allCountriesData, 'length:', allCountriesData?.length);
+  const [countriesData, setCountriesData] = useState<CountryData[]>(allCountriesData);
+  const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(mockDashboardStats as DashboardStats);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [dataLoading, setDataLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(false);
   const [comparisonMode, setComparisonMode] = useState(false);
-
-  useEffect(() => {
-    // Load dashboard data
-    const loadDashboardData = async () => {
-      try {
-        // TODO: Replace with actual data loading from Supabase
-        setDashboardStats({
-          totalCountries: 195,
-          avgStabilityScore: 72.5,
-          highRiskCountries: 23,
-          lowRiskCountries: 89,
-          lastUpdated: new Date().toISOString()
-        });
-        
-        setCountriesData([]);
-        setDataLoading(false);
-      } catch (error) {
-        console.error('Error loading dashboard data:', error);
-        setDataLoading(false);
-      }
-    };
-
-    loadDashboardData();
-  }, []);
 
   const handleCountrySelect = (country: any) => {
     setSelectedCountry(country);
@@ -132,7 +112,7 @@ export default function DashboardPage() {
                     <div className="flex-1">
                       <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Total Negara</p>
                       <p className="text-heading-lg font-bold text-text-primary">
-                        {dashboardStats.totalCountries}
+                        {dashboardStats.total_countries}
                       </p>
                     </div>
                   </div>
@@ -148,7 +128,7 @@ export default function DashboardPage() {
                     <div className="flex-1">
                       <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Skor Stabilitas Rata-rata</p>
                       <p className="text-heading-lg font-bold text-risk-low-base">
-                        {dashboardStats.avgStabilityScore}
+                        {dashboardStats.avg_uri_score}
                       </p>
                     </div>
                   </div>
@@ -164,7 +144,7 @@ export default function DashboardPage() {
                     <div className="flex-1">
                       <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Negara Risiko Tinggi</p>
                       <p className="text-heading-lg font-bold text-risk-critical-base">
-                        {dashboardStats.highRiskCountries}
+                        {dashboardStats.high_risk}
                       </p>
                     </div>
                   </div>
@@ -180,7 +160,7 @@ export default function DashboardPage() {
                     <div className="flex-1">
                       <p className="text-caption text-text-muted uppercase tracking-wider mb-1">Negara Risiko Rendah</p>
                       <p className="text-heading-lg font-bold text-risk-moderate-base">
-                        {dashboardStats.lowRiskCountries}
+                        {dashboardStats.low_risk}
                       </p>
                     </div>
                   </div>

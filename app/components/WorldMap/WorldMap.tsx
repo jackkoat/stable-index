@@ -130,13 +130,16 @@ export function WorldMap({
           {/* Background */}
           <rect width="900" height="500" fill="#F8FAFC" />
           
+          {/* Debug rect */}
+          <rect x="0" y="0" width="100" height="100" fill="red" />
+          
           {/* Debug info */}
           <text x="10" y="20" className="text-xs fill-gray-600">
             Debug: {getAvailableCountries().length} countries, {mapData.size} mapped
           </text>
           
           {/* Render countries using optimized batch rendering */}
-          {Object.entries(countryCoordinates).map(([countryCode, coords]) => (
+          {Object.entries(countryCoordinates).filter(([code]) => mapData.has(code)).map(([countryCode, coords]) => (
             <CountryRenderer
               key={countryCode}
               countryCode={countryCode}
