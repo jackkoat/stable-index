@@ -35,7 +35,7 @@ export default function DataPage() {
                            text-accent-navy uppercase tracking-wider font-semibold mb-6">
                 Country Data Table
               </div>
-              <h1 className="text-heading-2xl font-bold text-text-primary mb-6 leading-tight">
+              <h1 className="text-heading-lg md:text-heading-2xl font-bold text-text-primary mb-6 leading-tight">
                 Comprehensive Country Risk Database
               </h1>
               <p className="text-body-lg text-text-secondary max-w-4xl leading-relaxed">

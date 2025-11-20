@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Globe } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Globe, Twitter } from 'lucide-react';
 import { Button } from '../shared/Button';
 
 export function HeroHeader() {
@@ -67,6 +67,16 @@ export function HeroHeader() {
             <Globe className="w-5 h-5 text-accent-navy" />
             <span className="text-sm font-medium">24/7 Global Monitoring</span>
           </div>
+          <a 
+            href="https://x.com/stableindexai" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-accent-navy transition-colors duration-200"
+            aria-label="Follow us on X (Twitter)"
+          >
+            <Twitter className="w-5 h-5 text-accent-navy" />
+            <span className="text-sm font-medium">Follow on X</span>
+          </a>
         </div>
       </motion.div>
     </div>
